@@ -1,16 +1,17 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import createBrowserHistory from 'history/lib/createBrowserHistory'
-import { useRouterHistory } from 'react-router'
-import { syncHistoryWithStore } from 'react-router-redux'
+import createHashHistory from 'history/lib/createHashHistory'
+import {useRouterHistory} from 'react-router'
+import {syncHistoryWithStore} from 'react-router-redux'
 import createStore from './store/createStore'
 import AppContainer from './containers/AppContainer'
 
 // ========================================================
 // Browser History Setup
 // ========================================================
-const browserHistory = useRouterHistory(createBrowserHistory)({
-  basename: __BASENAME__
+const browserHistory = useRouterHistory(createHashHistory)({
+  basename: __BASENAME__,
+  queryKey: false
 })
 
 // ========================================================
@@ -61,7 +62,7 @@ if (__DEV__ && module.hot) {
   const renderError = (error) => {
     const RedBox = require('redbox-react')
 
-    ReactDOM.render(<RedBox error={error} />, MOUNT_NODE)
+    ReactDOM.render(<RedBox error={error}/>, MOUNT_NODE)
   }
   render = () => {
     try {
