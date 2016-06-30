@@ -1,0 +1,34 @@
+language: node_js
+node_js: stable
+
+sudo: false
+
+# master为hexo博客所在分支
+branches:
+  only:
+  - master
+
+before_install:
+- openssl aes-256-cbc -K $encrypted_5ff8ca309359_key -iv $encrypted_5ff8ca309359_iv -in .travis/id_rsa.enc -out ~/.ssh/id_rsa -d
+- chmod 600 ~/.ssh/id_rsa
+- eval $(ssh-agent)
+- ssh-add ~/.ssh/id_rsa
+- cp .travis/ssh_config ~/.ssh/config
+- git config --global user.name 'JounQin'
+- git config --global user.email 'liujiaren1992@vip.qq.com'
+
+install:
+- npm i
+
+script:
+- npm run lint
+- npm run test
+- NODE_ENV=production npm run deploy
+- cd dist
+- git init
+- git add .
+- git commit -m "Update Website Pages"
+- git push --force --quiet git@github.com:JounQin/1stg.git master:gh-pages
+
+after_success:
+- npm run codecov
