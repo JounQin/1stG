@@ -29,6 +29,7 @@ script:
 - git add .
 - git commit -m "Update Website Pages"
 - git push --force --quiet git@github.com:JounQin/1stg.git master:gh-pages
+- git push --force --quiet git@git.coding.net:JounQin/1stg.git master:coding-pages
 
 after_success:
 - npm run codecov
