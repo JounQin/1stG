@@ -24,7 +24,7 @@ install:
 script:
 - npm run lint
 - npm run test
-- NODE_ENV=production npm run deploy
+- npm run deploy:prod
 - cd dist
 - git init
 - git add .
