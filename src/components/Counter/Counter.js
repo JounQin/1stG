@@ -3,8 +3,8 @@ import Header from '../Header'
 import classes from './Counter.scss'
 
 export const Counter = (props) => (
-  <div className="text-center">
-    <Header/>
+  <div className='text-center'>
+    <Header />
     <h2 className={classes.counterContainer}>
       Counter:
       {' '}

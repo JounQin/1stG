@@ -9,7 +9,7 @@ export default (store) => ({
     require.ensure([], (require) => {
       /*  Webpack - use require callback to define
           dependencies for bundling   */
-      require('bootstrap/dist/css/bootstrap.css');
+      require('bootstrap/dist/css/bootstrap.css')
       const Counter = require('./containers/CounterContainer').default
       const reducer = require('./modules/counter').default
 

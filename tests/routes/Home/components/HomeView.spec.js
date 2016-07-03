@@ -9,16 +9,16 @@ describe('(View) Home', () => {
     _component = render(<HomeView />)
   })
 
-  it('Renders a welcome message', () => {
-    const welcome = _component.find('h4')
-    expect(welcome).to.exist
-    expect(welcome.text()).to.match(/Welcome!/)
+  it('Renders a Animations text', () => {
+    const Animations = _component.find('.css h2')
+    expect(Animations).to.exist
+    expect(Animations.text()).to.match(/Animations/)
   })
 
-  it('Renders an awesome duck image', () => {
-    const duck = _component.find('img')
-    expect(duck).to.exist
-    expect(duck.attr('alt')).to.match(/This is a duck, because Redux!/)
+  it('Renders four links', () => {
+    const links = _component.find('nav').getElementsByTagName('a')
+    expect(links).to.exist
+    expect(links.length).to.equals(4)
   })
 
 })
