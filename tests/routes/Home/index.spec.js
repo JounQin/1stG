@@ -1,3 +1,4 @@
+import React from 'react'
 import HomeRoute from 'routes/Home'
 import { render } from 'enzyme'
 
