@@ -1,10 +1,11 @@
 import HomeRoute from 'routes/Home'
+import { render } from 'enzyme'
 
 describe('(Route) Home', () => {
   let _component
 
   beforeEach(() => {
-    _component = new HomeRoute.component()
+    _component = render(<HomeRoute.component />)
   })
 
   it('Should return a route configuration object', () => {

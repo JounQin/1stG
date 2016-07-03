@@ -16,7 +16,7 @@ describe('(View) Home', () => {
   })
 
   it('Renders four links', () => {
-    const links = _component.find('nav').getElementsByTagName('a')
+    const links = _component.find('nav a')
     expect(links).to.exist
     expect(links.length).to.equals(4)
   })
