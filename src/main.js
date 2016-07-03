@@ -32,7 +32,7 @@ const history = syncHistoryWithStore(browserHistory, store, {
 // ========================================================
 if (__DEBUG__) {
   if (window.devToolsExtension) {
-    window.devToolsExtension.open()
+    // window.devToolsExtension.open()
   }
 }
 
@@ -60,7 +60,7 @@ let render = (routerKey = null) => {
 if (__DEV__ && module.hot) {
   const renderApp = render
   const renderError = (error) => {
-    const RedBox = require('redbox-react')
+    const RedBox = require('redbox-react').default
 
     ReactDOM.render(<RedBox error={error} />, MOUNT_NODE)
   }

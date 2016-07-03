@@ -1,5 +1,221 @@
-.duck {
-  display: block;
-  width: 120px;
-  margin: 1.5rem auto;
+body.wrap-bg {
+  background: #b8d7e9;
+  background: radial-gradient(circle, #f9fcff 20%, #e2eff7 50%, #b1d4e7 100%);
+}
+
+.m-nav {
+  width: 800px;
+  height: 640px;
+  font-family: '\5fae\8f6f\96c5\9ed1', arial, sans-serif;
+
+  :global {
+    a {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      overflow: hidden;
+      color: #fff;
+    }
+
+    .mysite {
+      width: 320px;
+      height: 320px;
+      margin: -160px 0 0 -160px;
+    }
+
+    .css {
+      background: #1496bf;
+      transform: rotate(45deg) translate(-80px, -80px);
+    }
+
+    .blog {
+      background: #c465bb;
+      transform: rotate(45deg) translate(241px, -80px);
+    }
+
+    .lab {
+      background: #eb584b;
+      transform: rotate(45deg) translate(-80px, 241px);
+    }
+
+    .github {
+      width: 160px;
+      height: 160px;
+      margin: -80px 0 0 -80px;
+      background: #fad957;
+      transform: rotate(45deg) translate(-321px, 0);
+    }
+
+    .cont {
+      position: absolute;
+      z-index: 2;
+      top: 50%;
+      left: 50%;
+      text-shadow: 0 0 3px rgba(255, 255, 255, .3);
+      text-align: center;
+      transform: rotate(-45deg) translate3d(0, 0, 0);
+    }
+
+    .mysite .cont {
+      width: 226px;
+      height: 226px;
+      margin: -113px 0 0 -113px;
+    }
+
+    .github .cont {
+      width: 114px;
+      height: 114px;
+      margin: -57px 0 0 -57px;
+    }
+
+    .title {
+      display: block;
+      font-weight: normal;
+      margin: 0;
+    }
+
+    .mysite .title {
+      padding-top: 50px;
+      font-size: 32px;
+    }
+
+    .link-btn {
+      display: inline-block;
+      overflow: hidden;
+      vertical-align: top;
+    }
+
+    .mysite .link-btn {
+      width: 180px;
+      height: 56px;
+      margin-top: 20px;
+      border: 1px solid #fff;
+      font-size: 18px;
+      line-height: 56px;
+      transition: all 1s linear;
+    }
+
+    .mysite:hover .link-btn {
+      background: #fff;
+    }
+
+    .css .link-btn:before {
+      content: 'View Demo';
+    }
+
+    .css:hover .link-btn {
+      color: #3ea8ca;
+
+      &:before {
+        content: 'Coming Soon';
+      }
+    }
+
+    .blog:hover .link-btn {
+      color: #c465bb;
+    }
+
+    .lab:hover .link-btn {
+      color: #eb584b;
+    }
+
+    .mysite .bg {
+      overflow: hidden;
+      position: absolute;
+      width: 452px;
+      height: 452px;
+      opacity: 0;
+      transition: all 1s ease-in-out;
+      transform: rotate(-45deg) translate(0, -90px);
+    }
+
+    .css .bg {
+      background: url(../assets/site.png) no-repeat;
+    }
+
+    .blog .bg {
+      background: url(../assets/site2.png) no-repeat;
+    }
+
+    .lab .bg {
+      background: url(../assets/site3.png) no-repeat;
+    }
+
+    .mysite:hover .bg {
+      opacity: .5;
+      background-position: 0px -10px;
+    }
+
+    .github .title {
+      padding-top: 70px;
+      font-size: 20px;
+    }
+
+    .github .link-btn {
+      width: 50px;
+      height: 50px;
+      margin-top: -80px;
+      background: url(../assets/github.png) no-repeat;
+      line-height: 10;
+    }
+
+    .border {
+      position: absolute;
+      overflow: hidden;
+      background: rgba(255, 255, 255, .5);
+      -webkit-transition: all 1s linear;
+      -moz-transition: all 1s linear;
+      transition: all 1s linear;
+    }
+
+    .border-t, .border-b {
+      height: 1px;
+    }
+
+    .border-r, .border-l {
+      width: 1px;
+    }
+
+    .border-t {
+      top: 8px;
+      right: 100%;
+      left: 8px;
+    }
+
+    .border-b {
+      bottom: 8px;
+      right: 8px;
+      left: 100%;
+    }
+
+    .border-r {
+      top: 8px;
+      bottom: 100%;
+      right: 8px;
+    }
+
+    .border-l {
+      top: 100%;
+      bottom: 8px;
+      left: 8px;
+    }
+
+    a:hover {
+      .border-t {
+        right: 8px;
+      }
+
+      .border-b {
+        left: 8px;
+      }
+
+      .border-r {
+        bottom: 8px;
+      }
+
+      .border-l {
+        top: 8px;
+      }
+    }
+  }
 }

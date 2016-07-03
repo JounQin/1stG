@@ -1,8 +1,10 @@
 import React from 'react'
+import Header from '../Header'
 import classes from './Counter.scss'
 
 export const Counter = (props) => (
-  <div>
+  <div className="text-center">
+    <Header/>
     <h2 className={classes.counterContainer}>
       Counter:
       {' '}
