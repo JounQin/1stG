@@ -7,25 +7,26 @@ const body = document.body
 export class HomeView extends Component {
   constructor () {
     super()
-    this.handlerClick = this.handlerClick.bind(this)
+    this.handleClick = this.handleClick.bind(this)
   }
 
-  handlerClick (e) {
+  handleClick (e) {
     e.preventDefault()
   }
 
   componentWillMount () {
-    body.className = classes['wrap-bg']
+    this.originalBodyClass = body.className.trim().replace(/\s+/g,' ')
+    body.className = this.originalBodyClass + ' ' + classes['wrap-bg']
   }
 
   componentWillUnmount () {
-    body.className = ''
+    body.className = this.originalBodyClass
   }
 
   render () {
     return (
       <nav className={classes['m-nav']}>
-        <Link to='/animations' className='css mysite' onClick={this.handlerClick}>
+        <Link to='/animations' className='css mysite' onClick={this.handleClick}>
           <div className='cont'>
             <h2 className='title'>Animations</h2>
             <span className='link-btn'>
