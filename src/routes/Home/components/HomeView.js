@@ -15,7 +15,7 @@ export class HomeView extends Component {
   }
 
   componentWillMount () {
-    this.originalBodyClass = body.className.trim().replace(/\s+/g,' ')
+    this.originalBodyClass = body.className.trim().replace(/\s+/g, ' ')
     body.className = this.originalBodyClass + ' ' + classes['wrap-bg']
   }
 
