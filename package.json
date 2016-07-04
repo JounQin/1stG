@@ -95,6 +95,7 @@
     "debug": "^2.2.0",
     "extract-text-webpack-plugin": "^1.0.0",
     "file-loader": "^0.9.0",
+    "fonts.css": "^1.4.0",
     "fs-extra": "^0.30.0",
     "history": "^2.1.2",
     "html-webpack-plugin": "^2.7.1",
