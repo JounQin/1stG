@@ -16,7 +16,10 @@ const webpackConfig = {
   devtool: config.compiler_devtool,
   resolve: {
     root: paths.client(),
-    extensions: ['', '.js', '.jsx', '.json']
+    extensions: ['', '.js', '.jsx', '.json'],
+    alias:{
+      'bootstrap.less': 'bootstrap/less/bootstrap.less'
+    }
   },
   module: {}
 }
@@ -185,6 +188,17 @@ if (isUsingCSSModules) {
   })
 
   webpackConfig.module.loaders.push({
+    test: /\.less/,
+    include: cssModulesRegex,
+    loaders: [
+      'style',
+      cssModulesLoader,
+      'postcss',
+      'less?sourceMap'
+    ]
+  })
+
+  webpackConfig.module.loaders.push({
     test: /\.css$/,
     include: cssModulesRegex,
     loaders: [
@@ -205,6 +219,16 @@ webpackConfig.module.loaders.push({
     BASE_CSS_LOADER,
     'postcss',
     'sass?sourceMap'
+  ]
+})
+webpackConfig.module.loaders.push({
+  test: /\.less/,
+  exclude: excludeCSSModules,
+  loaders: [
+    'style',
+    BASE_CSS_LOADER,
+    'postcss',
+    'less?sourceMap'
   ]
 })
 webpackConfig.module.loaders.push({
