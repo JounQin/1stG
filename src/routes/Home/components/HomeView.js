@@ -5,9 +5,14 @@ import classes from './HomeView.scss'
 const body = document.body
 
 export class HomeView extends Component {
-  constructor () {
-    super()
+  constructor (props) {
+    super(props)
     this.handleClick = this.handleClick.bind(this)
+    const getScale = () => Math.min(body.clientWidth / 1000, body.clientHeight / 750)
+    this.state = {scale: getScale()}
+    window.onresize = () => {
+      this.setState({scale: getScale()})
+    }
   }
 
   handleClick (e) {
@@ -21,11 +26,18 @@ export class HomeView extends Component {
 
   componentWillUnmount () {
     body.className = this.originalBodyClass
+    window.onresize = null
   }
 
   render () {
+    const transformPrefix = 'transform'
+    const translate3d = `translate3d(-50%, -50%, 0) scale(${this.state.scale})`
+    const transform = {};
+    ['Ms', 'Moz', 'O', 'Webkit', ''].forEach(value => {
+      transform[value ? value + transformPrefix.replace(/^t/, 'T') : transformPrefix] = translate3d
+    })
     return (
-      <nav className={classes['m-nav']}>
+      <nav className={classes['m-nav']} style={{transform: translate3d}}>
         <Link to='/animations' className='css mysite' onClick={this.handleClick}>
           <div className='cont'>
             <h2 className='title'>Animations</h2>
@@ -75,7 +87,6 @@ export class HomeView extends Component {
       </nav>
     )
   }
-
 }
 
 export default HomeView

@@ -17,7 +17,7 @@ const webpackConfig = {
   resolve: {
     root: paths.client(),
     extensions: ['', '.js', '.jsx', '.json'],
-    alias:{
+    alias: {
       'bootstrap.less': 'bootstrap/less/bootstrap.less'
     }
   },
