@@ -1,10 +1,10 @@
-import React from 'react'
-import Header from '../Header'
-import classes from './Counter.scss'
+import React from 'react';
+import Header from '../Header';
+import classes from './Counter.scss';
 
 export const Counter = (props) => (
   <div className='text-center'>
-    <Header />
+    <Header/>
     <h2 className={classes.counterContainer}>
       Counter:
       {' '}
@@ -20,12 +20,12 @@ export const Counter = (props) => (
       Double (Async)
     </button>
   </div>
-)
+);
 
 Counter.propTypes = {
   counter: React.PropTypes.number.isRequired,
   doubleAsync: React.PropTypes.func.isRequired,
   increment: React.PropTypes.func.isRequired
-}
+};
 
-export default Counter
+export default Counter;
