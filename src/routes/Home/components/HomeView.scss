@@ -146,7 +146,7 @@ body.wrap-bg {
 
     .mysite:hover .bg {
       opacity: .5;
-      background-position: 0px -10px;
+      background-position: 0 -10px;
     }
 
     .github .title {
@@ -171,11 +171,13 @@ body.wrap-bg {
       transition: all 1s linear;
     }
 
-    .border-t, .border-b {
+    .border-t,
+    .border-b {
       height: 1px;
     }
 
-    .border-r, .border-l {
+    .border-r,
+    .border-l {
       width: 1px;
     }
 
