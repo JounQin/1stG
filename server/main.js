@@ -33,7 +33,7 @@ if (config.env === 'development') {
   const compiler = webpack(webpackConfig);
 
   // Enable webpack-dev and webpack-hot middleware
-  const { publicPath } = webpackConfig.output;
+  const {publicPath} = webpackConfig.output;
 
   app.use(webpackDevMiddleware(compiler, publicPath));
   app.use(webpackHMRMiddleware(compiler));

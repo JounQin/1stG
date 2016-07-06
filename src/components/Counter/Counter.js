@@ -3,7 +3,7 @@ import Header from '../Header';
 import classes from './Counter.scss';
 
 export const Counter = (props) => (
-  <div className='text-center'>
+  <div className="text-center">
     <Header/>
     <h2 className={classes.counterContainer}>
       Counter:
@@ -12,11 +12,11 @@ export const Counter = (props) => (
         {props.counter}
       </span>
     </h2>
-    <button className='btn btn-default' onClick={props.increment}>
+    <button className="btn btn-default" onClick={props.increment}>
       Increment
     </button>
     {' '}
-    <button className='btn btn-default' onClick={props.doubleAsync}>
+    <button className="btn btn-default" onClick={props.doubleAsync}>
       Double (Async)
     </button>
   </div>

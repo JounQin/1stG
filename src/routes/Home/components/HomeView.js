@@ -27,9 +27,6 @@ export class HomeView extends Component {
   componentWillUnmount() {
     body.className = this.originalBodyClass;
     window.onresize = null;
-    (function () {
-
-    })();
   }
 
   render() {
@@ -41,51 +38,51 @@ export class HomeView extends Component {
     });
     return (
       <nav className={classes['m-nav']} style={{transform: translate3d}}>
-        <Link to='/animations' className='css mysite' onClick={this.handleClick}>
-          <div className='cont'>
-            <h2 className='title'>Animations</h2>
-            <span className='link-btn'>
+        <Link to="/animations" className="css mysite" onClick={this.handleClick}>
+          <div className="cont">
+            <h2 className="title">Animations</h2>
+            <span className="link-btn">
               {/* View Demo */}
             </span>
           </div>
-          <span className='border border-t'/>
-          <span className='border border-r'/>
-          <span className='border border-b'/>
-          <span className='border border-l'/>
-          <span className='bg'/>
+          <span className="border border-t"/>
+          <span className="border border-r"/>
+          <span className="border border-b"/>
+          <span className="border border-l"/>
+          <span className="bg"/>
         </Link>
-        <a href='http://blog.1stg.me' target='_blank' className='blog mysite'>
-          <div className='cont'>
-            <h2 className='title'>My Blog</h2>
-            <span className='link-btn'>View Technology</span>
+        <a href="http://blog.1stg.me" target="_blank" className="blog mysite">
+          <div className="cont">
+            <h2 className="title">My Blog</h2>
+            <span className="link-btn">View Technology</span>
           </div>
-          <span className='border border-t'/>
-          <span className='border border-r'/>
-          <span className='border border-b'/>
-          <span className='border border-l'/>
-          <span className='bg'/>
+          <span className="border border-t"/>
+          <span className="border border-r"/>
+          <span className="border border-b"/>
+          <span className="border border-l"/>
+          <span className="bg"/>
         </a>
-        <Link to='/counter' className='lab mysite'>
-          <div className='cont'>
-            <h2 className='title'>前端实验室</h2>
-            <span className='link-btn'>View Front-end Lab</span>
+        <Link to="/counter" className="lab mysite">
+          <div className="cont">
+            <h2 className="title">前端实验室</h2>
+            <span className="link-btn">View Front-end Lab</span>
           </div>
-          <span className='border border-t'/>
-          <span className='border border-r'/>
-          <span className='border border-b'/>
-          <span className='border border-l'/>
-          <span className='bg'/>
+          <span className="border border-t"/>
+          <span className="border border-r"/>
+          <span className="border border-b"/>
+          <span className="border border-l"/>
+          <span className="bg"/>
         </Link>
-        <a href='https://github.com/JounQin' target='_blank' className='github'>
-          <div className='cont'>
-            <h2 className='title'>GitHub</h2>
-            <span className='link-btn'>View</span>
+        <a href="https://github.com/JounQin" target="_blank" className="github">
+          <div className="cont">
+            <h2 className="title">GitHub</h2>
+            <span className="link-btn">View</span>
           </div>
-          <span className='border border-t'/>
-          <span className='border border-r'/>
-          <span className='border border-b'/>
-          <span className='border border-l'/>
-          <span className='bg'/>
+          <span className="border border-t"/>
+          <span className="border border-r"/>
+          <span className="border border-b"/>
+          <span className="border border-l"/>
+          <span className="bg"/>
         </a>
       </nav>
     );
