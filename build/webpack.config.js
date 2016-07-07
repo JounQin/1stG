@@ -98,27 +98,27 @@ if (!__TEST__) {
 // Pre-Loaders
 // ------------------------------------
 /*
-[ NOTE ]
-We no longer use eslint-loader due to it severely impacting build
-times for larger projects. `npm run lint` still exists to aid in
-deploy processes (such as with CI), and it's recommended that you
-use a linting plugin for your IDE in place of this loader.
+ [ NOTE ]
+ We no longer use eslint-loader due to it severely impacting build
+ times for larger projects. `npm run lint` still exists to aid in
+ deploy processes (such as with CI), and it's recommended that you
+ use a linting plugin for your IDE in place of this loader.
 
-If you do wish to continue using the loader, you can uncomment
-the code below and run `npm i --save-dev eslint-loader`. This code
-will be removed in a future release.
+ If you do wish to continue using the loader, you can uncomment
+ the code below and run `npm i --save-dev eslint-loader`. This code
+ will be removed in a future release.
 
-webpackConfig.module.preLoaders = [{
-  test: /\.(js|jsx)$/,
-  loader: 'eslint',
-  exclude: /node_modules/
-}]
+ webpackConfig.module.preLoaders = [{
+ test: /\.(js|jsx)$/,
+ loader: 'eslint',
+ exclude: /node_modules/
+ }]
 
-webpackConfig.eslint = {
-  configFile: paths.base('.eslintrc'),
-  emitWarning: __DEV__
-}
-*/
+ webpackConfig.eslint = {
+ configFile: paths.base('.eslintrc'),
+ emitWarning: __DEV__
+ }
+ */
 
 // ------------------------------------
 // Loaders
@@ -138,8 +138,7 @@ webpackConfig.module.loaders = [{
       }
     }
   }
-},
-{
+}, {
   test: /\.json$/,
   loader: 'json'
 }];
@@ -188,7 +187,7 @@ if (isUsingCSSModules) {
   });
 
   webpackConfig.module.loaders.push({
-    test: /\.less/,
+    test: /\.less$/,
     include: cssModulesRegex,
     loaders: [
       'style',
@@ -221,16 +220,21 @@ webpackConfig.module.loaders.push({
     'sass?sourceMap'
   ]
 });
+
+const lessLoaders = [
+  'style',
+  BASE_CSS_LOADER,
+  'postcss',
+  'less?sourceMap'
+];
+
 webpackConfig.module.loaders.push({
-  test: /\.less/,
-  exclude: excludeCSSModules,
-  loaders: [
-    'style',
-    BASE_CSS_LOADER,
-    'postcss',
-    'less?sourceMap'
-  ]
+  test: /\.less$/,
+  exclude: __DEV__ ? excludeCSSModules
+    : new RegExp(`${excludeCSSModules.source}|bootstrap\\.less`, excludeCSSModules.flags),
+  loaders: lessLoaders
 });
+
 webpackConfig.module.loaders.push({
   test: /\.css$/,
   exclude: excludeCSSModules,
@@ -269,13 +273,22 @@ webpackConfig.postcss = [
 // File loaders
 /* eslint-disable */
 webpackConfig.module.loaders.push(
-  { test: /\.woff(\?.*)?$/,  loader: 'url?prefix=fonts/&name=[path][name].[ext]&limit=10000&mimetype=application/font-woff' },
-  { test: /\.woff2(\?.*)?$/, loader: 'url?prefix=fonts/&name=[path][name].[ext]&limit=10000&mimetype=application/font-woff2' },
-  { test: /\.otf(\?.*)?$/,   loader: 'file?prefix=fonts/&name=[path][name].[ext]&limit=10000&mimetype=font/opentype' },
-  { test: /\.ttf(\?.*)?$/,   loader: 'url?prefix=fonts/&name=[path][name].[ext]&limit=10000&mimetype=application/octet-stream' },
-  { test: /\.eot(\?.*)?$/,   loader: 'file?prefix=fonts/&name=[path][name].[ext]' },
-  { test: /\.svg(\?.*)?$/,   loader: 'url?prefix=fonts/&name=[path][name].[ext]&limit=10000&mimetype=image/svg+xml' },
-  { test: /\.(png|jpg)$/,    loader: 'url?limit=8192' }
+  {
+    test: /\.woff(\?.*)?$/,
+    loader: 'url?prefix=fonts/&name=[path][name].[ext]&limit=10000&mimetype=application/font-woff'
+  },
+  {
+    test: /\.woff2(\?.*)?$/,
+    loader: 'url?prefix=fonts/&name=[path][name].[ext]&limit=10000&mimetype=application/font-woff2'
+  },
+  {test: /\.otf(\?.*)?$/, loader: 'file?prefix=fonts/&name=[path][name].[ext]&limit=10000&mimetype=font/opentype'},
+  {
+    test: /\.ttf(\?.*)?$/,
+    loader: 'url?prefix=fonts/&name=[path][name].[ext]&limit=10000&mimetype=application/octet-stream'
+  },
+  {test: /\.eot(\?.*)?$/, loader: 'file?prefix=fonts/&name=[path][name].[ext]'},
+  {test: /\.svg(\?.*)?$/, loader: 'url?prefix=fonts/&name=[path][name].[ext]&limit=10000&mimetype=image/svg+xml'},
+  {test: /\.(png|jpg)$/, loader: 'url?limit=8192'}
 )
 /* eslint-enable */
 
@@ -285,21 +298,34 @@ webpackConfig.module.loaders.push(
 // when we don't know the public path (we know it only when HMR is enabled [in development]) we
 // need to use the extractTextPlugin to fix this issue:
 // http://stackoverflow.com/questions/34133808/webpack-ots-parsing-error-loading-fonts/34133809#34133809
+const extractCSS = new ExtractTextPlugin('css', '[name].[contenthash].css', {
+  allChunks: true
+});
 if (!__DEV__) {
   debug('Apply ExtractTextPlugin to CSS loaders.');
   webpackConfig.module.loaders.filter((loader) =>
     loader.loaders && loader.loaders.find((name) => /css/.test(name.split('?')[0]))
   ).forEach((loader) => {
     const [first, ...rest] = loader.loaders;
-    loader.loader = ExtractTextPlugin.extract(first, rest.join('!'));
+    loader.loader = extractCSS.extract(first, rest.join('!'));
     Reflect.deleteProperty(loader, 'loaders');
   });
 
   webpackConfig.plugins.push(
-    new ExtractTextPlugin('[name].[contenthash].css', {
-      allChunks: true
-    })
+    extractCSS
   );
+
+  const extractBootstrap = new ExtractTextPlugin('bootstrap', 'bootstrap.[contenthash].css', {allChunks: true});
+
+  const [first, ...rest] = lessLoaders;
+
+  webpackConfig.module.loaders.push({
+    test: /bootstrap\.less$/,
+    exclude: excludeCSSModules,
+    loader: extractBootstrap.extract(first, rest.join('!'))
+  });
+
+  webpackConfig.plugins.push(extractBootstrap);
 }
 
 export default webpackConfig;
