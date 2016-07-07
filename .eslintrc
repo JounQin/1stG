@@ -1,11 +1,11 @@
 {
   "parser": "babel-eslint",
+  "plugins": [
+    "babel"
+  ],
   "extends": [
     "standard",
     "standard-react"
-  ],
-  "plugins": [
-    "babel"
   ],
   "env": {
     "browser": true
