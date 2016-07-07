@@ -1,20 +1,20 @@
-import React from 'react'
-import HomeRoute from 'routes/Home'
-import { render } from 'enzyme'
+import React from 'react';
+import HomeRoute from 'routes/Home';
+import {render} from 'enzyme';
 
 describe('(Route) Home', () => {
-  let _component
+  let _component;
 
   beforeEach(() => {
-    _component = render(<HomeRoute.component />)
-  })
+    _component = render(<HomeRoute.component/>);
+  });
 
   it('Should return a route configuration object', () => {
-    expect(typeof(HomeRoute)).to.equal('object')
-  })
+    expect(typeof (HomeRoute)).to.equal('object');
+  });
 
   it('Should define a route component', () => {
     // expect(_component.type).to.equal('nav')
-    expect(_component.find('nav')).to.exist
-  })
-})
+    expect(_component.find('nav')).to.exist;
+  });
+});
