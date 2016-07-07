@@ -3,19 +3,20 @@ import {Link} from 'react-router';
 import classes from './HomeView.scss';
 
 const body = document.body;
+const html = body.parentElement;
 
 export class HomeView extends Component {
   constructor(props) {
     super(props);
-    this.handleClick = this.handleClick.bind(this);
-    const getScale = () => Math.min(body.clientWidth / 1000, body.clientHeight / 750);
+    HomeView.handleClick = HomeView.handleClick.bind(this);
+    const getScale = () => Math.min(html.clientWidth / 1000, html.clientHeight / 750);
     this.state = {scale: getScale()};
     window.onresize = () => {
       this.setState({scale: getScale()});
     };
   }
 
-  handleClick(e) {
+  static handleClick(e) {
     e.preventDefault();
   }
 
@@ -38,7 +39,7 @@ export class HomeView extends Component {
     });
     return (
       <nav className={classes['m-nav']} style={{transform: translate3d}}>
-        <Link to="/animations" className="css mysite" onClick={this.handleClick}>
+        <Link to="/animations" className="css mysite" onClick={HomeView.handleClick}>
           <div className="cont">
             <h2 className="title">Animations</h2>
             <span className="link-btn">

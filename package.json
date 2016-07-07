@@ -10,8 +10,8 @@
   "scripts": {
     "clean": "rimraf dist",
     "compile": "better-npm-run compile",
-    "lint": "stylelint --syntax scss src/**/*.scss && eslint src tests server",
-    "lint:fix": "npm run lint -- --fix",
+    "lint": "eslint src tests server && stylelint --syntax scss src/**/*.scss",
+    "lint:fix": "eslint src tests server --fix",
     "start": "better-npm-run start",
     "dev": "better-npm-run dev",
     "dev:no-debug": "npm run dev -- --no_debug",
