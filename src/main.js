@@ -78,3 +78,18 @@ if (__DEV__ && module.hot) {
 // Go!
 // ========================================================
 render();
+
+// 禁用浏览器缩放
+var scrollFunc = function (e) {
+  e = e || window.event;
+  e.returnValue = false;
+  return false;
+};
+
+//W3C 
+if (document.addEventListener) {
+  document.addEventListener('DOMMouseScroll', scrollFunc, false);
+}
+
+//IE/Opera/Chrome/Safari
+window.onmousewheel = document.onmousewheel = scrollFunc;
