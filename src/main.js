@@ -86,10 +86,10 @@ var scrollFunc = function (e) {
   return false;
 };
 
-//W3C 
+// W3C
 if (document.addEventListener) {
   document.addEventListener('DOMMouseScroll', scrollFunc, false);
 }
 
-//IE/Opera/Chrome/Safari
+// IE/Opera/Chrome/Safari
 window.onmousewheel = document.onmousewheel = scrollFunc;
