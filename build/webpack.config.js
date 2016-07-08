@@ -271,7 +271,6 @@ webpackConfig.postcss = [
 ];
 
 // File loaders
-/* eslint-disable */
 webpackConfig.module.loaders.push(
   {
     test: /\.woff(\?.*)?$/,
@@ -281,16 +280,27 @@ webpackConfig.module.loaders.push(
     test: /\.woff2(\?.*)?$/,
     loader: 'url?prefix=fonts/&name=[path][name].[ext]&limit=10000&mimetype=application/font-woff2'
   },
-  {test: /\.otf(\?.*)?$/, loader: 'file?prefix=fonts/&name=[path][name].[ext]&limit=10000&mimetype=font/opentype'},
+  {
+    test: /\.otf(\?.*)?$/,
+    loader: 'file?prefix=fonts/&name=[path][name].[ext]&limit=10000&mimetype=font/opentype'
+  },
   {
     test: /\.ttf(\?.*)?$/,
     loader: 'url?prefix=fonts/&name=[path][name].[ext]&limit=10000&mimetype=application/octet-stream'
   },
-  {test: /\.eot(\?.*)?$/, loader: 'file?prefix=fonts/&name=[path][name].[ext]'},
-  {test: /\.svg(\?.*)?$/, loader: 'url?prefix=fonts/&name=[path][name].[ext]&limit=10000&mimetype=image/svg+xml'},
-  {test: /\.(png|jpg)$/, loader: 'url?limit=8192'}
-)
-/* eslint-enable */
+  {
+    test: /\.eot(\?.*)?$/,
+    loader: 'file?prefix=fonts/&name=[path][name].[ext]'
+  },
+  {
+    test: /\.svg(\?.*)?$/,
+    loader: 'url?prefix=fonts/&name=[path][name].[ext]&limit=10000&mimetype=image/svg+xml'
+  },
+  {
+    test: /\.(png|jpg)$/,
+    loader: 'url?limit=8192'
+  }
+);
 
 // ------------------------------------
 // Finalize Configuration
@@ -298,10 +308,12 @@ webpackConfig.module.loaders.push(
 // when we don't know the public path (we know it only when HMR is enabled [in development]) we
 // need to use the extractTextPlugin to fix this issue:
 // http://stackoverflow.com/questions/34133808/webpack-ots-parsing-error-loading-fonts/34133809#34133809
-const extractCSS = new ExtractTextPlugin('css', '[name].[contenthash].css', {
-  allChunks: true
-});
 if (!__DEV__) {
+  
+  const extractCSS = new ExtractTextPlugin('css', '[name].[contenthash].css', {
+    allChunks: true
+  });
+  
   debug('Apply ExtractTextPlugin to CSS loaders.');
   webpackConfig.module.loaders.filter((loader) =>
     loader.loaders && loader.loaders.find((name) => /css/.test(name.split('?')[0]))
