@@ -63,9 +63,9 @@ export class HomeView extends Component {
           <span className="border border-l"/>
           <span className="bg"/>
         </a>
-        <Link to="/counter" className="lab mysite">
+        <Link to="http://hi.1stg.me" className="lab mysite">
           <div className="cont">
-            <h2 className="title">前端实验室</h2>
+            <h2 className="title">前端实验室 (Vue)</h2>
             <span className="link-btn">View Front-end Lab</span>
           </div>
           <span className="border border-t"/>
