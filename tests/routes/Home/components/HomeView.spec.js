@@ -9,10 +9,10 @@ describe('(View) Home', () => {
     _component = render(<HomeView/>);
   });
 
-  it('Renders a Animations text', () => {
-    const Animations = _component.find('.css h2');
-    expect(Animations).to.exist;
-    expect(Animations.text()).to.match(/Animations/);
+  it('Renders a "EasyHi - Vue" text', () => {
+    const EasyHi = _component.find('.css h2');
+    expect(EasyHi).to.exist;
+    expect(EasyHi.text()).to.match(/EasyHi - Vue/);
   });
 
   it('Renders four links', () => {
