@@ -17,7 +17,7 @@ export class HomeView extends Component {
   }
 
   static handleClick(e) {
-    e.preventDefault();
+    // e.preventDefault();
   }
 
   componentWillMount() {
@@ -39,9 +39,9 @@ export class HomeView extends Component {
     });
     return (
       <nav className={classes['m-nav']} style={{transform: translate3d}}>
-        <Link to="/animations" className="css mysite" onClick={HomeView.handleClick}>
+        <a href="http://hi.1stg.me" target="_blank" className="css mysite" onClick={HomeView.handleClick}>
           <div className="cont">
-            <h2 className="title">Animations</h2>
+            <h2 className="title">EasyHi - Vue</h2>
             <span className="link-btn">
               {/* View Demo */}
             </span>
@@ -51,7 +51,7 @@ export class HomeView extends Component {
           <span className="border border-b"/>
           <span className="border border-l"/>
           <span className="bg"/>
-        </Link>
+        </a>
         <a href="http://blog.1stg.me" target="_blank" className="blog mysite">
           <div className="cont">
             <h2 className="title">My Blog</h2>
@@ -63,9 +63,9 @@ export class HomeView extends Component {
           <span className="border border-l"/>
           <span className="bg"/>
         </a>
-        <Link to="http://hi.1stg.me" className="lab mysite">
+        <Link to="/counter" className="lab mysite">
           <div className="cont">
-            <h2 className="title">前端实验室 (Vue)</h2>
+            <h2 className="title">前端实验室</h2>
             <span className="link-btn">View Front-end Lab</span>
           </div>
           <span className="border border-t"/>
