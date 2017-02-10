@@ -18,7 +18,9 @@
     "__BASENAME__": false
   },
   "rules": {
+    "array-bracket-spacing": 2,
     "babel/generator-star-spacing": 1,
+    "computed-property-spacing": 2,
     "eol-last": 2,
     "generator-star-spacing": 0,
     "jsx-quotes": [
@@ -33,6 +35,9 @@
     ],
     "max-nested-callbacks": 2,
     "max-params": 2,
+    "no-unused-expressions": 0,
+    "object-curly-spacing": 2,
+    "prefer-promise-reject-errors": 0,
     "react/jsx-space-before-closing": [
       2,
       "never"
@@ -47,9 +52,6 @@
         "anonymous": "always",
         "named": "never"
       }
-    ],
-    "object-curly-spacing": 2,
-    "array-bracket-spacing": 2,
-    "computed-property-spacing": 2
+    ]
   }
 }
