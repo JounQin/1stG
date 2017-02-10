@@ -1,13 +1,3 @@
-.DS_STORE
-*.log
-
-node_modules
-
 dist
-coverage
-
-# IntelliJ project files
-.idea
-*.iml
-out
-gen
+*.log
+node_modules

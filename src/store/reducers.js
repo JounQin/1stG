@@ -1,17 +1,40 @@
-import {combineReducers} from 'redux';
-import {routerReducer as router} from 'react-router-redux';
+import {ADD_TODO, TOGGLE_TODO, SET_VISIBILITY_FILTER, VisibilityFilters} from './actions'
+const {SHOW_ALL} = VisibilityFilters
 
-export const makeRootReducer = (asyncReducers) => {
-  return combineReducers({
-    // Add sync reducers here
-    router,
-    ...asyncReducers
-  });
-};
+function visibilityFilter(state = SHOW_ALL, action) {
+  switch (action.type) {
+  case SET_VISIBILITY_FILTER:
+    return action.filter
+  default:
+    return state
+  }
+}
 
-export const injectReducer = (store, {key, reducer}) => {
-  store.asyncReducers[key] = reducer;
-  store.replaceReducer(makeRootReducer(store.asyncReducers));
-};
+function todos(state = [], action) {
+  switch (action.type) {
+  case ADD_TODO:
+    return [
+      ...state,
+      {
+        text: action.text,
+        completed: false
+      }
+    ]
+  case TOGGLE_TODO:
+    return state.map((todo, index) => {
+      if (index === action.index) {
+        return Object.assign({}, todo, {
+          completed: !todo.completed
+        })
+      }
+      return todo
+    })
+  default:
+    return state
+  }
+}
 
-export default makeRootReducer;
+export default {
+  visibilityFilter,
+  todos
+}

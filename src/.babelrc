@@ -1,6 +1,15 @@
 {
   "presets": [
-    "env",
+    [
+      "env",
+      {
+        "targets": {
+          "node": true,
+          "ie": 9
+        },
+        "modules": false
+      }
+    ],
     "stage-0",
     "react"
   ],
