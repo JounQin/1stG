@@ -1,10 +1,10 @@
 {
-  "name": "react-ssr",
+  "name": "1stg",
   "version": "0.0.1",
   "private": true,
   "description": "try to learn using React with server slide render deeply",
   "main": "index.js",
-  "repository": "git@github.com:JounQin/react-ssr.git",
+  "repository": "git@github.com:JounQin/1stg.git",
   "author": "JounQin <admin@1stg.me>",
   "license": "MIT",
   "scripts": {
