@@ -28,3 +28,5 @@ const renderApp = () => match({history, routes}, (error, redirectLocation, rende
 renderApp()
 
 if (module.hot) module.hot.accept('routes', renderApp)
+
+location.protocol === 'https:' && navigator.serviceWorker && navigator.serviceWorker.register('/service-worker.js')
