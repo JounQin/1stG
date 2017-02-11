@@ -1,13 +1,14 @@
 import path from 'path'
 
 const NODE_ENV = process.env.NODE_ENV || 'development'
+const PORT = process.env.PORT || 3000
 
 export const globals = {
   NODE_ENV,
   'process.env.NODE_ENV': JSON.stringify(NODE_ENV),
-  "__DEV__": NODE_ENV === 'development',
-  "__TEST__": NODE_ENV === 'test',
-  "__PROD__": NODE_ENV === 'production'
+  __DEV__: NODE_ENV === 'development',
+  __TEST__: NODE_ENV === 'test',
+  __PROD__: NODE_ENV === 'production'
 }
 
 export const paths = (() => {
@@ -24,12 +25,10 @@ export const paths = (() => {
 
 export const pkg = require(paths.base('package.json'))
 
-export const alias = {
-  "react": 'react-lite',
-  'react-dom': 'react-lite'
-}
+export const alias = {}
 
 export const vendors = [
+  'classnames',
   'react',
   'react-dom',
   'react-redux',
@@ -40,7 +39,7 @@ export const vendors = [
 
 export default {
   serverHost: 'localhost',
-  serverPort: 3000,
+  serverPort: PORT,
   devTool: 'source-map',
   publicPath: '',
   hashType: 'hash',

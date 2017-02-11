@@ -36,8 +36,8 @@ export default (app, opts) => {
   serverCompiler.watch({}, (err, stats) => {
     if (err) throw err
     stats = stats.toJson()
-    stats.errors.forEach(err => console.error(err))
-    stats.warnings.forEach(err => console.warn(err))
+    stats.errors.forEach(console.error)
+    stats.warnings.forEach(console.warn)
     opts.bundleUpdated(JSON.parse(mfs.readFileSync(paths.dist('react-ssr-bundle.json'), 'utf-8')))
   })
 }

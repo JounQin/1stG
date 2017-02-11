@@ -19,7 +19,7 @@ const history = syncHistoryWithStore(browserHistory, store)
 const renderApp = () => match({history, routes}, (error, redirectLocation, renderProps) => render(
   <AppContainer>
     <Provider store={store}>
-      <Router {...renderProps} render={applyRouterMiddleware(useScroll())}/>
+      <Router {...renderProps} render={applyRouterMiddleware(useScroll())} key={Math.random()}/>
     </Provider>
   </AppContainer>,
   document.getElementById('app')
@@ -27,9 +27,4 @@ const renderApp = () => match({history, routes}, (error, redirectLocation, rende
 
 renderApp()
 
-if (module.hot) {
-  module.hot.accept('routes', () => {
-    require('routes')
-    renderApp()
-  })
-}
+if (module.hot) module.hot.accept('routes', renderApp)

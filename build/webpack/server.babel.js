@@ -3,7 +3,7 @@ import BabiliPlugin from 'babili-webpack-plugin'
 import ReactSsrPlugin from '../../packages/react-ssr-webpack-plugin'
 import _debug from 'debug'
 
-import {globals, paths, pkg} from '../config'
+import config, {globals, paths, pkg} from '../config'
 
 import base from './base'
 
@@ -15,10 +15,6 @@ debug(`create webpack configuration for NODE_ENV:${NODE_ENV}`)
 
 const serverConfig = {
   ...base,
-  resolve: {
-    ...base.resolve,
-    alias: {}
-  },
   target: 'node',
   devtool: false,
   entry: paths.src('entry-server.js'),
@@ -33,10 +29,11 @@ const serverConfig = {
       ...globals,
       __SERVER__: true
     }),
-    new BabiliPlugin(),
     new ReactSsrPlugin()
   ],
   externals: Object.keys(pkg.dependencies)
 }
+
+config.minimize && serverConfig.plugins.push(new BabiliPlugin())
 
 export default serverConfig

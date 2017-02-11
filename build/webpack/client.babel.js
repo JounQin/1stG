@@ -7,7 +7,7 @@ import _debug from 'debug'
 
 import config, {globals, paths, pkg, vendors} from '../config'
 
-import base, {CSS_LOADER, nodeModules, STYLE_LOADER, STYLUS_LOADER} from './base'
+import base, {CSS_LOADER, prodEmpty, nodeModules, STYLE_LOADER, STYLUS_LOADER} from './base'
 
 const {minimize, devTool} = config
 
@@ -41,12 +41,12 @@ const clientConfig = {
       ...base.module.rules,
       {
         test: /[/\\]app\.styl$/,
-        use: loaderUtil((appLoader = new ExtractTextPlugin('app.[contenthash].css'))),
+        use: loaderUtil((appLoader = new ExtractTextPlugin(`${prodEmpty('app.')}[contenthash].css`))),
         exclude: nodeModules
       },
       {
         test: /[/\\]bootstrap\.styl$/,
-        use: loaderUtil((bootstrapLoader = new ExtractTextPlugin('bootstrap.[contenthash].css'))),
+        use: loaderUtil((bootstrapLoader = new ExtractTextPlugin(`${prodEmpty('bootstrap.')}[contenthash].css`))),
         exclude: nodeModules
       },
       {
@@ -81,6 +81,10 @@ const clientConfig = {
 }
 
 if (minimize) {
+  Object.assign(clientConfig.resolve.alias, {
+    react: 'react-lite',
+    'react-dom': 'react-lite'
+  })
   clientConfig.plugins.push(
     new webpack.optimize.UglifyJsPlugin({
       mangle: !sourceMap,

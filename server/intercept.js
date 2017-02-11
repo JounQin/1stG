@@ -58,4 +58,3 @@ export default ({headers, method, url}, options = {}) => {
     return true
   }
 }
-
