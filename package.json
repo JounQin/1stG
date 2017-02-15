@@ -19,7 +19,7 @@
     "lint": "npm run lint:es",
     "lint:es": "eslint .",
     "lint:fix": "npm run lint:es -- --fix",
-    "pm2": "cross-env NODE_ENV=production PORT=4000 pm2 start build/bin/start.js --name=react-ssr"
+    "pm2": "cross-env NODE_ENV=production PORT=4000 pm2 start build/bin/start.js --name=1stg"
   },
   "dependencies": {
     "bootstrap-styl": "^5.0.8",
@@ -33,7 +33,7 @@
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
     "react-hot-loader": "^3.0.0-beta.6",
-    "react-lite": "^0.15.31",
+    "react-lite": "^0.15.32",
     "react-redux": "^5.0.2",
     "react-router": "^3.0.2",
     "react-router-redux": "^4.0.8",
@@ -42,14 +42,14 @@
     "stylus-px2rem": "^1.0.11"
   },
   "devDependencies": {
-    "babel-core": "^6.22.1",
+    "babel-core": "^6.23.1",
     "babel-eslint": "^7.1.1",
-    "babel-loader": "^6.2.10",
-    "babel-polyfill": "^6.22.0",
+    "babel-loader": "^6.3.1",
+    "babel-polyfill": "^6.23.0",
     "babel-preset-env": "^1.1.8",
-    "babel-preset-react": "^6.22.0",
+    "babel-preset-react": "^6.23.0",
     "babel-preset-stage-0": "^6.22.0",
-    "babel-register": "^6.22.0",
+    "babel-register": "^6.23.0",
     "babili-webpack-plugin": "^0.0.10",
     "cross-env": "^3.1.4",
     "css-loader": "^0.26.1",
