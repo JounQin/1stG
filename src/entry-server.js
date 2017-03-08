@@ -36,7 +36,7 @@ export default context => {
         )}</div>`
         content += `<script>window.__initialState__=${serialize(store.getState())}</script>`
         content += template.tail
-      } else return reject()
+      } else return reject(new Error('unknown error'))
 
       resolve({
         content,

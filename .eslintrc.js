@@ -38,12 +38,14 @@ module.exports = {
     ],
     'max-nested-callbacks': 2,
     'max-params': [2, 5],
+    'no-return-await': 0,
     'no-unused-expressions': 0,
     'quote-props': 0,
     'react/jsx-wrap-multilines': 0,
     'react/prop-types': [2, {
       ignore: ['children']
     }],
+    'standard/no-callback-literal': 0,
     'space-before-function-paren': [
       2,
       {
