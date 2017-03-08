@@ -24,7 +24,7 @@
   "dependencies": {
     "bootstrap-styl": "^5.0.8",
     "classnames": "^2.2.5",
-    "history": "^3.0.0",
+    "history": "^4.6.0",
     "koa": "^2.0.0",
     "koa-compress": "^2.0.0",
     "koa-logger": "^2.0.1",
