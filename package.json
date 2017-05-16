@@ -27,7 +27,7 @@
     "history": "3.3.0",
     "koa": "^2.2.0",
     "koa-compress": "^2.0.0",
-    "koa-logger": "^2.0.1",
+    "koa-logger": "^3.0.0",
     "koa-static": "^3.0.0",
     "nib": "^1.1.2",
     "react": "^16.0.0-alpha.12",
