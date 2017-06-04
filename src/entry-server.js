@@ -1,47 +1,38 @@
 import React from 'react'
 import {renderToString} from 'react-dom/server'
-import {Provider} from 'react-redux'
 import {createMemoryHistory, match, RouterContext} from 'react-router'
-import {syncHistoryWithStore} from 'react-router-redux'
-import serialize from 'serialize-javascript'
+import _axios from 'axios'
 
-import routes from 'routes'
-import {configureStore} from 'store'
+import createRoutes from 'routes'
 
-export default context => {
-  const {template, url} = context
-  return new Promise((resolve, reject) => {
-    const memoryHistory = createMemoryHistory(url)
-    const store = configureStore(memoryHistory)
-    const history = syncHistoryWithStore(memoryHistory, store)
+export default context => new Promise((resolve, reject) => {
+  const start = __DEV__ && Date.now()
 
-    match({history, routes, location: url}, (error, redirectLocation, renderProps) => {
-      let status, content
+  const {ctx} = context
+  const {url} = ctx
 
-      if (error) {
-        status = 500
-        content = error.message
-      } else if (redirectLocation) {
-        status = 302
-        content = redirectLocation.pathname + redirectLocation.search
-      } else if (renderProps) {
-        status = 200
-        content = template.head
-        content += context.styles || ''
-        content += template.neck
-        content += `<div id="app">${renderToString(
-          <Provider store={store}>
-            <RouterContext {...renderProps}/>
-          </Provider>
-        )}</div>`
-        content += `<script>window.__initialState__=${serialize(store.getState())}</script>`
-        content += template.tail
-      } else return reject(new Error('unknown error'))
+  const axios = _axios.create()
 
-      resolve({
-        content,
-        status
-      })
-    })
+  axios.defaults.headers = ctx.headers
+
+  match({
+    history: createMemoryHistory(url),
+    routes: createRoutes(axios),
+    location: url
+  }, (error, redirectLocation, renderProps) => {
+    let status, content
+
+    if (error) return reject(error)
+
+    if (redirectLocation) {
+      content = redirectLocation.pathname + redirectLocation.search
+      status = 302
+    } else {
+      renderProps.router.ssrContext = Object.assign(context, {axios})
+      content = renderToString(<RouterContext {...renderProps}/>)
+    }
+
+    __DEV__ && console.log(`data pre-fetch: ${Date.now() - start}ms`)
+    resolve({content, status})
   })
-}
+})

@@ -4,7 +4,7 @@ import Grid from './Grid'
 
 import classes from './index.styl'
 
-export default class extends React.PureComponent {
+export default withStyle(class extends React.PureComponent {
   render() {
     return <main className={classes.main}>
       {[{
@@ -29,4 +29,4 @@ export default class extends React.PureComponent {
       }].map((info, index) => <Grid key={index} info={info}/>)}
     </main>
   }
-}
+}, classes, false)

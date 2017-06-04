@@ -1,9 +1,9 @@
-import React, {PureComponent} from 'react'
+import React from 'react'
 
-export default class extends PureComponent {
+export default withStyle(class extends React.PureComponent {
   render() {
     return (<div>
       Let's start a counter here!
     </div>)
   }
-}
+})

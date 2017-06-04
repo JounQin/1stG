@@ -7,7 +7,23 @@ import webpackHot from './webpack-hot'
 import config, {paths} from '../../build/config'
 import {clientConfig, serverConfig} from '../../build/webpack'
 
-export default (app, opts) => {
+const readFile = (fs, file) => {
+  try {
+    return fs.readFileSync(paths.dist(file), 'utf-8')
+  } catch (e) {}
+}
+
+export default (app, cb) => {
+  let bundle, template, fs
+  let _resolve
+  const readyPromise = new Promise(resolve => {
+    _resolve = resolve
+  })
+  const ready = (...args) => {
+    _resolve()
+    cb(...args)
+  }
+
   clientConfig.entry.app.unshift('react-hot-loader/patch', 'webpack-hot-middleware/client')
 
   const clientCompiler = webpack(clientConfig)
@@ -21,10 +37,15 @@ export default (app, opts) => {
     stats: config.stats
   })
 
-  clientCompiler.plugin('done', () => {
-    const fs = devMiddleware.fileSystem
-    const filePath = paths.dist('index.html')
-    if (fs.existsSync(filePath)) opts.templateUpdated(fs.readFileSync(filePath, 'utf-8'))
+  clientCompiler.plugin('done', stats => {
+    stats = stats.toJson()
+    stats.errors.forEach(console.error)
+    stats.warnings.forEach(console.warn)
+    if (stats.errors.length) return
+
+    fs = devMiddleware.fileSystem
+    template = readFile(fs, 'index.html')
+    bundle && ready(bundle, {template, fs})
   })
 
   app.use(webpackDev(clientCompiler, devMiddleware))
@@ -36,8 +57,11 @@ export default (app, opts) => {
   serverCompiler.watch({}, (err, stats) => {
     if (err) throw err
     stats = stats.toJson()
-    stats.errors.forEach(console.error)
-    stats.warnings.forEach(console.warn)
-    opts.bundleUpdated(JSON.parse(mfs.readFileSync(paths.dist('react-ssr-bundle.json'), 'utf-8')))
+    if (stats.errors.length) return
+
+    bundle = JSON.parse(readFile(mfs, 'ssr-bundle.json'))
+    template && ready(bundle, {template, fs})
   })
+
+  return readyPromise
 }

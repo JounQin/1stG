@@ -11,16 +11,10 @@ module.exports = {
     'react'
   ],
   env: {
-    browser: true
-  },
-  globals: {
-    __DEV__: false,
-    __PROD__: false,
-    __SERVER__: false,
-    __SSR__: false
+    node: true
   },
   parserOptions: {
-    ecmaVersion: 6,
+    ecmaVersion: 2017,
     sourceType: 'module'
   },
   rules: {
@@ -38,7 +32,7 @@ module.exports = {
     ],
     'max-nested-callbacks': 2,
     'max-params': [2, 5],
-    'no-return-await': 0,
+    'no-empty': [2, {allowEmptyCatch: true}],
     'no-unused-expressions': 0,
     'quote-props': 0,
     'react/jsx-wrap-multilines': 0,

@@ -4,12 +4,12 @@ import Koa from 'koa'
 import compress from 'koa-compress'
 import logger from 'koa-logger'
 import serve from 'koa-static'
+import re from 'path-to-regexp'
 import _debug from 'debug'
-import runInVm from './run-in-vm'
 
 import config, {globals, paths} from '../build/config'
 
-import intercept from './intercept'
+import {intercept, parseTemplate, createRunner} from './utils'
 
 const {__DEV__} = globals
 
@@ -20,66 +20,64 @@ const app = new Koa()
 app.use(compress())
 app.use(logger())
 
-function parseTemplate(template, contentPlaceholder = '<div id="app">') {
-  if (typeof template === 'object') {
-    return template
-  }
+let run, template, readyPromise, mfs
 
-  let i = template.indexOf('</head>')
-  const j = template.indexOf(contentPlaceholder)
+const koaVersion = require('koa/package.json').version
+const reactVersion = require('react/package.json').version
 
-  if (j < 0) {
-    throw new Error(`Content placeholder not found in template.`)
-  }
+const INDEX_PAGE = 'index.html'
 
-  if (i < 0) {
-    i = template.indexOf('<body>')
-    if (i < 0) {
-      i = j
-    }
-  }
+const NON_SSR_PATTERN = []
 
-  return {
-    head: template.slice(0, i),
-    neck: template.slice(i, j),
-    tail: template.slice(j + contentPlaceholder.length)
-  }
+const DEFAULT_HEADERS = {
+  'Content-Type': 'text/html',
+  Server: `koa/${koaVersion}; react/${reactVersion}`
 }
 
-let bundle, template
+app.use(async (ctx, next) => {
+  await readyPromise
 
-app.use(async(ctx, next) => {
-  const {req, res} = ctx
-
-  if (!bundle || !template) {
-    ctx.status = 200
-    return res.end('waiting for compilation... refresh in a moment.')
+  if (intercept(ctx, {logger: __DEV__ && debug})) {
+    await next()
+    return
   }
 
-  if (intercept(ctx)) return await next()
+  ctx.set(DEFAULT_HEADERS)
+
+  if (NON_SSR_PATTERN.find(pattern => re(pattern).exec(ctx.url))) {
+    if (__DEV__) {
+      ctx.body = mfs.createReadStream(paths.dist(INDEX_PAGE))
+    } else {
+      ctx.url = INDEX_PAGE
+      await next()
+    }
+    return
+  }
 
   try {
-    const context = {url: req.url, template: parseTemplate(template)}
-    const executed = await runInVm(bundle.entry, bundle.files, context)
-    const {status, content} = await executed
-    ctx.status = status
-    res[status === 302 ? 'redirect' : 'end'](content)
-    res.end(content)
+    const context = {ctx}
+    const {status, content} = await run(context)
+
+    if (status === 302) return ctx.redirect(content)
+
+    ctx.body = template.head + (context.styles || '') + template.neck + `<div id="app">${content}</div>` + template.tail
   } catch (e) {
     ctx.status = 500
-    res.end('internal server error')
+    ctx.body = 'internal server error'
     console.error(e)
   }
 })
 
 if (__DEV__) {
-  require('./dev').default(app, {
-    bundleUpdated: bund => (bundle = bund),
-    templateUpdated: temp => (template = temp)
+  readyPromise = require('./dev').default(app, (bundle, {template: temp, fs}) => {
+    mfs = fs
+    run = createRunner(bundle)
+    template = parseTemplate(temp)
   })
 } else {
-  bundle = require(paths.dist('react-ssr-bundle.json'))
-  template = fs.readFileSync(paths.dist('index.html'), 'utf-8')
+  mfs = fs
+  run = createRunner(require(paths.dist('ssr-bundle.json')))
+  template = parseTemplate(fs.readFileSync(paths.dist('index.html'), 'utf-8'))
   app.use(serve('dist'))
 }
 

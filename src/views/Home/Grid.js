@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import classNames from 'classnames'
 
 import Link from 'components/Link'
@@ -7,13 +8,13 @@ import classes from './grid.styl'
 
 import github from './github.png'
 
-export default class extends React.PureComponent {
+export default withStyle(class extends React.PureComponent {
   static propTypes = {
-    info: React.PropTypes.shape({
-      title: React.PropTypes.string,
-      text: React.PropTypes.string,
-      link: React.PropTypes.string,
-      className: React.PropTypes.string
+    info: PropTypes.shape({
+      title: PropTypes.string,
+      text: PropTypes.string,
+      link: PropTypes.string,
+      className: PropTypes.string
     })
   }
 
@@ -33,4 +34,4 @@ export default class extends React.PureComponent {
       </div>
     </Link>
   }
-}
+}, classes)

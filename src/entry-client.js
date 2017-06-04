@@ -1,26 +1,17 @@
-import 'styles/app'
-import 'styles/bootstrap'
-
 import React from 'react'
 import {render} from 'react-dom'
-import {Provider} from 'react-redux'
-import {syncHistoryWithStore} from 'react-router-redux'
-import {match, Router, applyRouterMiddleware, browserHistory} from 'react-router'
-import {useScroll} from 'react-router-scroll'
+import {match, Router, browserHistory} from 'react-router'
 import {AppContainer} from 'react-hot-loader'
+import axios from 'axios'
 
-import routes from 'routes'
-import {configureStore} from 'store'
+import createRoutes from 'routes'
 
-const store = configureStore(browserHistory, window.__initialState__)
-
-const history = syncHistoryWithStore(browserHistory, store)
-
-const renderApp = () => match({history, routes}, (error, redirectLocation, renderProps) => render(
+const renderApp = () => match({
+  history: browserHistory,
+  routes: createRoutes(axios)
+}, (error, redirectLocation, renderProps) => render(
   <AppContainer>
-    <Provider store={store}>
-      <Router {...renderProps} render={applyRouterMiddleware(useScroll())} key={Math.random()}/>
-    </Provider>
+    <Router {...renderProps}/>
   </AppContainer>,
   document.getElementById('app')
 ))

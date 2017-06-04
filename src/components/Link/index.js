@@ -1,8 +1,9 @@
 import React from 'react'
 import {Link as RouterLink} from 'react-router'
+import PropTypes from 'prop-types'
 
 export default class extends React.PureComponent {
-  static propTypes = {to: React.PropTypes.string}
+  static propTypes = {to: PropTypes.string}
 
   render() {
     const {to, children, ...rest} = this.props

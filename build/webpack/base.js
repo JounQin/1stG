@@ -39,7 +39,7 @@ const cssOptions = {
   ...cssMinimize
 }
 
-export const STYLE_LOADER = 'style-loader'
+export const STYLE_LOADER = 'react-style-loader'
 
 export const CSS_LOADER = 'css-loader?' + JSON.stringify(cssOptions)
 export const localIdentName = __PROD__ ? '[hash:base64]' : '[name]__[local]___[hash:base64:5]'
@@ -51,7 +51,8 @@ const cssModuleOptions = {
   localIdentName
 }
 
-export const CSS_MODULE_LOADER = 'css-loader?' + JSON.stringify(Object.assign({}, cssOptions, cssModuleOptions))
+export const CSS_MODULE_LOADER = 'css-loader?' +
+  JSON.stringify(Object.assign({react: true}, cssOptions, cssModuleOptions))
 
 export const nodeModules = /\bnode_modules\b/
 
