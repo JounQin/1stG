@@ -7,7 +7,7 @@ export default class extends React.PureComponent {
 
   render() {
     const {to, children, ...rest} = this.props
-    return /^(https?:)?\/\//i.test(to) ? <a href={to} {...rest}>{children}</a> :
-      <RouterLink to={to} {...rest}>{children}</RouterLink>
+    return /^(https?:)?\/\//i.test(to) ? <a href={to} {...rest}>{children}</a>
+      : <RouterLink to={to} {...rest}>{children}</RouterLink>
   }
 }

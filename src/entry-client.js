@@ -9,7 +9,7 @@ import createRoutes from 'routes'
 const renderApp = () => match({
   history: browserHistory,
   routes: createRoutes(axios)
-}, (error, redirectLocation, renderProps) => render(
+}, (error, redirectLocation, renderProps) => error || render(
   <AppContainer>
     <Router {...renderProps}/>
   </AppContainer>,

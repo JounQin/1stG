@@ -8,7 +8,7 @@ module.exports = {
   ],
   extends: [
     'standard',
-    'react'
+    'plugin:react/recommended'
   ],
   env: {
     node: true
@@ -35,7 +35,9 @@ module.exports = {
     'no-empty': [2, {allowEmptyCatch: true}],
     'no-unused-expressions': 0,
     'quote-props': 0,
+    'react/display-name': 0,
     'react/jsx-wrap-multilines': 0,
+    'react/no-unescaped-entities': 0,
     'react/prop-types': [2, {
       ignore: ['children']
     }],
