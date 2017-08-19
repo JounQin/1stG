@@ -11,7 +11,7 @@ const {browsers, devTool, minimize} = config
 
 const sourceMap = !!devTool
 
-export const prodEmpty = str => __PROD__ ? '' : str
+export const prodEmpty = str => (__PROD__ ? '' : str)
 
 const filename = `${prodEmpty('[name].')}[${config.hashType}].js`
 
@@ -51,8 +51,8 @@ const cssModuleOptions = {
   localIdentName
 }
 
-export const CSS_MODULE_LOADER = 'css-loader?' +
-  JSON.stringify(Object.assign({react: true}, cssOptions, cssModuleOptions))
+export const CSS_MODULE_LOADER =
+  'css-loader?' + JSON.stringify(Object.assign({react: true}, cssOptions, cssModuleOptions))
 
 export const nodeModules = /\bnode_modules\b/
 

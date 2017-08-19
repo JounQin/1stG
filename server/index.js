@@ -86,4 +86,5 @@ const {serverHost, serverPort} = config
 const args = [serverPort, serverHost]
 
 export default app.listen(...args, err =>
-  debug(...err ? [err] : ['Server is now running at %s:%s.', ...args.reverse()]))
+  debug(...(err ? [err] : ['Server is now running at %s:%s.', ...args.reverse()]))
+)

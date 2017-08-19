@@ -24,10 +24,13 @@ let bootstrapLoader
 
 const sourceLoaders = [CSS_LOADER, STYLUS_LOADER]
 
-const loaderUtil = plugin => plugin && minimize ? plugin.extract({
-  fallback: STYLE_LOADER,
-  use: sourceLoaders
-}) : [STYLE_LOADER, ...sourceLoaders]
+const loaderUtil = plugin =>
+  plugin && minimize
+    ? plugin.extract({
+        fallback: STYLE_LOADER,
+        use: sourceLoaders
+      })
+    : [STYLE_LOADER, ...sourceLoaders]
 
 const clientConfig = {
   ...base,
@@ -63,6 +66,7 @@ const clientConfig = {
       __SERVER__: false
     }),
     new webpack.optimize.CommonsChunkPlugin('vendors'),
+    new webpack.optimize.CommonsChunkPlugin('manifest'),
     new HtmlWebpackPlugin({
       templateContent: pug.renderFile(paths.src('index.pug'), {
         pretty: !minimize,
@@ -86,6 +90,7 @@ if (minimize) {
   //   'react-dom': 'react-lite'
   // })
   clientConfig.plugins.push(
+    new webpack.optimize.ModuleConcatenationPlugin(),
     new webpack.optimize.UglifyJsPlugin({
       mangle: !sourceMap,
       compress: {
@@ -104,25 +109,24 @@ if (minimize) {
 if (__DEV__) {
   debug('Enable plugins for live development (HMR, NoErrors).')
 
-  clientConfig.plugins.push(
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoEmitOnErrorsPlugin()
-  )
+  clientConfig.plugins.push(new webpack.HotModuleReplacementPlugin(), new webpack.NoEmitOnErrorsPlugin())
 } else {
   debug(`Enable plugins for ${NODE_ENV} (SWPrecache).`)
 
   clientConfig.plugins.push(
     new SWPrecacheWebpackPlugin({
-      cacheId: 'react-ssr',
+      cacheId: '1stg',
       filename: 'service-worker.js',
       minify: true,
       dontCacheBustUrlsMatching: /\./,
       staticFileGlobsIgnorePatterns: [/index\.html$/, /\.map$/, /\.json$/],
       stripPrefix: paths.dist().replace(/\\/g, '/'),
-      runtimeCaching: [{
-        urlPattern: /\//,
-        handler: 'networkFirst'
-      }]
+      runtimeCaching: [
+        {
+          urlPattern: /\//,
+          handler: 'networkFirst'
+        }
+      ]
     })
   )
 }
