@@ -24,6 +24,8 @@ before_install:
 
 before_script: greenkeeper-lockfile-update
 
-script: yarn lint
+script:
+  - yarn lint
+  - yarn build
 
 after_script: greenkeeper-lockfile-upload

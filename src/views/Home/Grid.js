@@ -30,13 +30,8 @@ export default withStyle(
           <div className={classes.content}>
             <div className={classes.wrapper}>
               {text ? '' : <img src={github} />}
-              <h2>
-                {title}
-              </h2>
-              {text &&
-                <button className="btn">
-                  {text}
-                </button>}
+              <h2>{title}</h2>
+              {text && <button className="btn">{text}</button>}
             </div>
           </div>
         </Link>
