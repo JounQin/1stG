@@ -57,7 +57,7 @@
     "cross-env": "^5.0.5",
     "css-loader": "^0.28.5",
     "eslint": "^4.5.0",
-    "eslint-config-1stg": "^0.0.4",
+    "eslint-config-1stg": "^0.0.5",
     "extract-text-webpack-plugin": "^3.0.0",
     "file-loader": "^0.11.2",
     "hash-sum": "^1.0.2",
