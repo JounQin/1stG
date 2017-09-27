@@ -19,7 +19,6 @@ before_install:
 - cp .travis/ssh_config ~/.ssh/config
 - git config --global user.name 'JounQin'
 - git config --global user.email 'liujiaren1992@vip.qq.com'
-- git checkout master
 - git push --force --quiet git@git.coding.net:JounQin/1stg.git
 - yarn global add greenkeeper-lockfile
 
