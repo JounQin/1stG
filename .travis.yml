@@ -15,7 +15,7 @@ before_install:
 - cp .travis/ssh_config ~/.ssh/config
 - git config --global user.name 'JounQin'
 - git config --global user.email 'liujiaren1992@vip.qq.com'
-- 'if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then git push --force --quiet git@git.coding.net:JounQin/1stg.git master:master; fi'
+- 'if [[ $TRAVIS_BRANCH = "master" && "$TRAVIS_PULL_REQUEST" = "false" ]]; then git push --force --quiet git@git.coding.net:JounQin/1stg.git master:master; fi'
 - yarn global add greenkeeper-lockfile
 
 before_script: greenkeeper-lockfile-update
