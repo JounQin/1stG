@@ -75,7 +75,7 @@
     "stylus-loader": "^3.0.1",
     "stylus-px2rem": "^1.0.14",
     "sw-precache-webpack-plugin": "^0.11.4",
-    "url-loader": "^0.5.9",
+    "url-loader": "^0.6.1",
     "webpack": "^3.6.0",
     "webpack-dev-middleware": "^1.12.0",
     "webpack-hot-middleware": "^2.19.1"
