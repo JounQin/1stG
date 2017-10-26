@@ -1,5 +1,5 @@
 import React from 'react'
-import {render} from 'react-dom'
+import {hydrate} from 'react-dom'
 import {match, Router, browserHistory} from 'react-router'
 import {AppContainer} from 'react-hot-loader'
 import axios from 'axios'
@@ -14,7 +14,7 @@ const renderApp = () =>
     },
     (error, redirectLocation, renderProps) =>
       error ||
-      render(
+      hydrate(
         <AppContainer>
           <Router {...renderProps} />
         </AppContainer>,
