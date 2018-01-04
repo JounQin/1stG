@@ -35,6 +35,7 @@ main() {
     cd sync
     cp -rf ../dist/static/* .
     cp ../*.md .
+    cp ../public/* .
 
     git add -A
     git status -s |

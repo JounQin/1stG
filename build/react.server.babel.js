@@ -3,7 +3,7 @@ import merge from 'webpack-merge'
 import nodeExternals from 'webpack-node-externals'
 import { SSRServerPlugin } from 'ssr-webpack-plugin'
 
-import { resolve } from './config'
+import { publicPath, resolve } from './config'
 
 import base, { babelLoader } from './base'
 
@@ -11,6 +11,7 @@ export default merge.smart(base, {
   entry: resolve('src/entry-server.js'),
   target: 'node',
   output: {
+    publicPath,
     path: resolve('dist'),
     filename: `[name].[chunkhash].js`,
     libraryTarget: 'commonjs2',

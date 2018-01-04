@@ -108,7 +108,7 @@ $bg-size: $content-size * 2;
   }
 
   &:after {
-    background-image: url('./site1.png');
+    background-image: url('assets/site1.webp');
   }
 }
 
@@ -122,7 +122,7 @@ $bg-size: $content-size * 2;
   }
 
   &:after {
-    background-image: url('./site2.png');
+    background-image: url('assets/site2.webp');
   }
 }
 
@@ -136,7 +136,7 @@ $bg-size: $content-size * 2;
   }
 
   &:after {
-    background-image: url('./site3.png');
+    background-image: url('assets/site3.webp');
   }
 }
 

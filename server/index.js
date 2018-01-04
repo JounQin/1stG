@@ -37,6 +37,9 @@ const cache = LRU(1000)
 
 const middlewares = [
   logger(),
+  serve('public', {
+    maxAge: MAX_AGE,
+  }),
   async (ctx, next) => {
     if (__DEV__) {
       await ready

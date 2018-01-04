@@ -30,6 +30,7 @@ main() {
 
     cd sync
     cp -rf ../dist/* .
+    cp -rf ../public public
     cp ../*.md .
 
     git add -A

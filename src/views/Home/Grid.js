@@ -8,7 +8,7 @@ import { withSsr } from 'utils'
 
 import styles from './grid.scss'
 
-import github from './github.png'
+import github from 'assets/github.webp'
 
 const Grid = ({ title, text, link, className }) => (
   <Link
