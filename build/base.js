@@ -86,7 +86,7 @@ export default {
   module: {
     rules: [
       {
-        test: /\.webp$/,
+        test: /\.(png|webp)$/,
         use: [
           {
             loader: 'url-loader',

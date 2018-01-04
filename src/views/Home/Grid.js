@@ -9,6 +9,7 @@ import { withSsr } from 'utils'
 import styles from './grid.scss'
 
 import github from 'assets/github.webp'
+import githubFallback from 'assets/github.png'
 
 const Grid = ({ title, text, link, className }) => (
   <Link
@@ -22,7 +23,13 @@ const Grid = ({ title, text, link, className }) => (
     <div className={classNames([styles.border, styles.borderL])} />
     <div className={styles.content}>
       <div className={styles.wrapper}>
-        {text ? null : <img src={github} />}
+        {text ? null : (
+          <picture>
+            <source srcSet={github} type="image/webp" />
+            <source srcSet={githubFallback} type="image/jpeg" />
+            <img src={githubFallback} alt="GitHub" />
+          </picture>
+        )}
         <h2>{title}</h2>
         {text && <button className="btn">{text}</button>}
       </div>
