@@ -35,8 +35,6 @@ main() {
     cd sync
     cp -rf ../dist/static/* .
     cp ../*.md .
-    touch CNAME
-    echo 'www.1stg.me' > CNAME
 
     git add -A
     git status -s |
