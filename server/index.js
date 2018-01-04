@@ -1,90 +1,149 @@
 import fs from 'fs'
 
-import Koa from 'koa'
-import compress from 'koa-compress'
-import logger from 'koa-logger'
-import serve from 'koa-static'
-import re from 'path-to-regexp'
 import _debug from 'debug'
+import Koa from 'koa'
+import cash from 'koa-cash'
+import compose from 'koa-compose'
+import compress from 'koa-compress'
+import convert from 'koa-convert'
+import logger from 'koa-logger'
+import serve from 'koa-static-cache'
+import LRU from 'lru-cache'
+import { createBundleRenderer } from 'react-server-renderer'
 
-import config, {globals, paths} from '../build/config'
+import {
+  __DEV__,
+  resolve,
+  runtimeRequire,
+  serverHost,
+  serverPort,
+} from '../build/config'
 
-import {intercept, parseTemplate, createRunner} from './utils'
+const debug = _debug('1stg:server')
 
-const {__DEV__} = globals
-
-const debug = _debug('hi:server')
+const template = __DEV__
+  ? require('pug').renderFile(resolve('server/template.pug'), {
+      pretty: true,
+    })
+  : fs.readFileSync(resolve('dist/template.html'), 'utf-8')
 
 const app = new Koa()
 
-app.use(compress())
-app.use(logger())
+let ready, renderer
 
-let run, template, readyPromise, mfs
+const MAX_AGE = 1000 * 3600 * 24 * 365 // one year
 
-const koaVersion = require('koa/package.json').version
-const reactVersion = require('react/package.json').version
+const cache = LRU(1000)
 
-const INDEX_PAGE = 'index.html'
-
-const NON_SSR_PATTERN = []
-
-const DEFAULT_HEADERS = {
-  'Content-Type': 'text/html',
-  Server: `koa/${koaVersion}; react/${reactVersion}`
-}
-
-app.use(async (ctx, next) => {
-  await readyPromise
-
-  if (intercept(ctx, {logger: __DEV__ && debug})) {
-    await next()
-    return
-  }
-
-  ctx.set(DEFAULT_HEADERS)
-
-  if (NON_SSR_PATTERN.find(pattern => re(pattern).exec(ctx.url))) {
+const middlewares = [
+  logger(),
+  async (ctx, next) => {
     if (__DEV__) {
-      ctx.body = mfs.createReadStream(paths.dist(INDEX_PAGE))
-    } else {
-      ctx.url = INDEX_PAGE
-      await next()
+      await ready
+    } else if (await ctx.cashed()) {
+      return
     }
-    return
-  }
 
-  try {
-    const context = {ctx}
-    const {status, content} = await run(context)
+    if (
+      ctx.method !== 'GET' ||
+      ctx.url.lastIndexOf('.') > ctx.url.lastIndexOf('/') ||
+      !['*/*', 'text/html'].find(mimeType =>
+        ctx.get('Accept').includes(mimeType),
+      )
+    ) {
+      return next()
+    }
 
-    if (status === 302) return ctx.redirect(content)
+    const context = { ctx, title: '1stG.me' }
 
-    ctx.body = template.head + (context.styles || '') + template.neck + `<div id="app">${content}</div>` + template.tail
-  } catch (e) {
-    ctx.status = 500
-    ctx.body = 'internal server error'
-    console.error(e)
-  }
-})
+    ctx.respond = false
+
+    const { res } = ctx
+
+    renderer
+      .renderToStream(context)
+      .on('afterRender', () => {
+        ctx.status = context.code || 200
+        ctx.set({
+          'Content-Type': 'text/html',
+        })
+      })
+      .on('error', e => {
+        const { status, url } = e
+
+        if (url) {
+          ctx.status = 302
+          ctx.set({ Location: url })
+          return res.end()
+        }
+
+        ctx.status = status || 500
+
+        switch (status) {
+          case 404:
+            return res.end('404 | Page Not Found')
+          default:
+            res.end('500 | Internal Server Error')
+            debug(`error during render : ${url}`)
+            debug(e.stack)
+        }
+      })
+      .pipe(res)
+  },
+]
+
+const createRenderer = (bundle, options) =>
+  createBundleRenderer(bundle, {
+    ...options,
+    template,
+    basedir: resolve('dist/static'),
+    runInNewContext: false,
+  })
 
 if (__DEV__) {
-  readyPromise = require('./dev').default(app, (bundle, {template: temp, fs}) => {
-    mfs = fs
-    run = createRunner(bundle)
-    template = parseTemplate(temp)
-  })
+  const { readyPromise, webpackMiddleware } = require('./dev').default(
+    ({ bundle, clientManifest }) => {
+      renderer = createRenderer(bundle, {
+        clientManifest,
+      })
+    },
+  )
+  ready = readyPromise
+  middlewares.push(webpackMiddleware)
 } else {
-  mfs = fs
-  run = createRunner(require(paths.dist('ssr-bundle.json')))
-  template = parseTemplate(fs.readFileSync(paths.dist('index.html'), 'utf-8'))
-  app.use(serve('dist'))
+  renderer = createRenderer(
+    runtimeRequire(resolve('dist/ssr-server-bundle.json')),
+    {
+      clientManifest: runtimeRequire(resolve('dist/ssr-client-manifest.json')),
+    },
+  )
+
+  const files = {}
+
+  middlewares.splice(
+    1,
+    0,
+    compress(),
+    serve(
+      resolve('dist/static'),
+      {
+        maxAge: MAX_AGE,
+      },
+      files,
+    ),
+    convert(
+      cash({
+        get: key => cache.get(key),
+        set: (key, value) => cache.set(key, value),
+      }),
+    ),
+  )
+
+  files['/service-worker.js'].maxAge = 0
 }
 
-const {serverHost, serverPort} = config
+app.use(compose(middlewares))
 
-const args = [serverPort, serverHost]
-
-export default app.listen(...args, err =>
-  debug(...(err ? [err] : ['Server is now running at %s:%s.', ...args.reverse()]))
-)
+app.listen(serverPort, serverHost, () => {
+  debug(`Server start listening at %s:%s`, serverHost, serverPort)
+})

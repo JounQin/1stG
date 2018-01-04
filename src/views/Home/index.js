@@ -1,43 +1,39 @@
 import React from 'react'
 
+import { withSsr } from 'utils'
+
 import Grid from './Grid'
 
-import classes from './index.styl'
+import styles from './index.scss'
 
-export default withStyle(
-  class extends React.PureComponent {
-    render() {
-      return (
-        <main className={classes.main}>
-          {[
-            {
-              title: 'GitHub',
-              link: 'https://github.com/JounQin',
-              className: 'github'
-            },
-            {
-              title: 'Vue Ssr',
-              text: 'View Demo',
-              link: 'https://vue-ssr.1stg.me/',
-              className: 'vue'
-            },
-            {
-              title: '奕起嗨',
-              text: 'View EasyHi',
-              link: 'https://hi.1stg.me',
-              className: 'hi'
-            },
-            {
-              title: 'My Blog',
-              text: 'View Technology',
-              link: 'https://blog.1stg.me',
-              className: 'blog'
-            }
-          ].map((info, index) => <Grid key={index} info={info} />)}
-        </main>
-      )
-    }
-  },
-  classes,
-  false
+const Home = () => (
+  <main className={styles.main}>
+    {[
+      {
+        title: 'GitHub',
+        link: 'https://github.com/JounQin',
+        className: 'github',
+      },
+      {
+        title: 'Rubick',
+        text: 'Vue SSR + TS',
+        link: 'https://rubick.1stg.me/',
+        className: 'rubick',
+      },
+      {
+        title: 'React Hackernews',
+        text: 'View React HN',
+        link: 'https://react-hn.now.sh',
+        className: 'react-hn',
+      },
+      {
+        title: 'My Blog',
+        text: 'Personal Website',
+        link: 'http://blog.1stg.me',
+        className: 'blog',
+      },
+    ].map((info, index) => <Grid key={index} {...info} />)}
+  </main>
 )
+
+export default withSsr(styles, false)(Home)

@@ -1,29 +1,36 @@
 import React from 'react'
-import {hydrate} from 'react-dom'
-import {match, Router, browserHistory} from 'react-router'
-import {AppContainer} from 'react-hot-loader'
-import axios from 'axios'
+import { hydrate } from 'react-dom'
+import { BrowserRouter } from 'react-router-dom'
 
-import createRoutes from 'routes'
+import App from 'App'
 
-const renderApp = () =>
-  match(
-    {
-      history: browserHistory,
-      routes: createRoutes(axios)
-    },
-    (error, redirectLocation, renderProps) =>
-      error ||
-      hydrate(
-        <AppContainer>
-          <Router {...renderProps} />
-        </AppContainer>,
-        document.getElementById('app')
-      )
+const AppContainer = __DEV__
+  ? require('react-hot-loader').AppContainer
+  : ({ children }) => children
+
+const render = () => {
+  const app = (
+    <AppContainer>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </AppContainer>
   )
 
-renderApp()
+  hydrate(app, document.getElementById('app'))
+}
 
-if (module.hot) module.hot.accept('routes', renderApp)
+render()
 
-location.protocol === 'https:' && navigator.serviceWorker && navigator.serviceWorker.register('/service-worker.js')
+if (module.hot) {
+  module.hot.accept('App', render)
+}
+
+if (
+  !__DEV__ &&
+  (location.protocol === 'https:' ||
+    ['127.0.0.1', 'localhost'].includes(location.hostname)) &&
+  navigator.serviceWorker
+) {
+  navigator.serviceWorker.register('./service-worker.js')
+}

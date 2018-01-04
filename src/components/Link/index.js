@@ -1,12 +1,15 @@
 import React from 'react'
-import {Link as RouterLink} from 'react-router'
 import PropTypes from 'prop-types'
+import { Link as RouterLink } from 'react-router-dom'
 
-export default class extends React.PureComponent {
-  static propTypes = {to: PropTypes.string, children: PropTypes.any}
+export default class Link extends React.PureComponent {
+  static propTypes = {
+    to: PropTypes.string,
+    children: PropTypes.any,
+  }
 
   render() {
-    const {to, children, ...rest} = this.props
+    const { to, children, ...rest } = this.props
     return /^(https?:)?\/\//i.test(to) ? (
       <a href={to} {...rest}>
         {children}

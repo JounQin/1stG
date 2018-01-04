@@ -1,4 +1,4 @@
-# react-ssr
+# 1stG.me
 
 try to learn using React with server slide render deeply
 
