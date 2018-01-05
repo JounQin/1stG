@@ -9,7 +9,7 @@ html(lang="en")
       if (location.hostname.indexOf('.github.io') !== -1) {
         location.href = 'https://www.1stg.me'
       } else {
-        const canvas = document.createElement('canvas')
+        var canvas = document.createElement('canvas')
         canvas.width = canvas.height = 1
         if (canvas.toDataURL && canvas.toDataURL('image/webp').indexOf('image/webp') === 5) {
           document.documentElement.classList.add('webp')
