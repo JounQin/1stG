@@ -4,8 +4,6 @@ import classNames from 'classnames'
 
 import Link from 'components/Link'
 
-import { withSsr } from 'utils'
-
 import styles from './grid.scss'
 
 import github from 'assets/github.webp'
@@ -44,4 +42,4 @@ Grid.propTypes = {
   className: PropTypes.string,
 }
 
-export default withSsr(styles)(Grid)
+export default Grid

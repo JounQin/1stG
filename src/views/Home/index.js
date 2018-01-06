@@ -1,7 +1,5 @@
 import React from 'react'
 
-import { withSsr } from 'utils'
-
 import Grid from './Grid'
 
 import styles from './index.scss'
@@ -36,4 +34,4 @@ const Home = () => (
   </main>
 )
 
-export default withSsr(styles, false)(Home)
+export default Home

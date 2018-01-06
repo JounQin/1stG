@@ -1,5 +1,4 @@
 import webpack from 'webpack'
-import ExtractTextWebpackPlugin from 'extract-text-webpack-plugin'
 import FriendlyErrorsWebpackPlugin from 'friendly-errors-webpack-plugin'
 import px2rem from 'postcss-plugin-px2rem'
 import UglifyjsWebpackPlugin from 'uglifyjs-webpack-plugin'
@@ -9,50 +8,42 @@ import { NODE_ENV, __DEV__, resolve } from './config'
 const souceMap = __DEV__
 const minimize = !souceMap
 
-const cssLoaders = react =>
-  ExtractTextWebpackPlugin.extract({
-    fallback: {
-      loader: 'react-style-loader',
-      options: {
-        react,
-      },
+const cssLoaders = modules => [
+  'react-style-loader',
+  {
+    loader: 'css-loader',
+    options: {
+      minimize,
+      souceMap,
+      modules,
+      camelCase: true,
+      importLoaders: 2,
+      localIdentName: __DEV__
+        ? '[path][name]__[local]--[hash:base64:5]'
+        : '[hash:base64:5]',
     },
-    use: [
-      {
-        loader: 'css-loader',
-        options: {
-          minimize,
-          souceMap,
-          modules: react,
-          camelCase: true,
-          importLoaders: 2,
-          localIdentName: __DEV__
-            ? '[path][name]__[local]--[hash:base64:5]'
-            : '[hash:base64:5]',
-        },
-      },
-      {
-        loader: 'postcss-loader',
-        options: {
-          minimize,
-          souceMap,
-          plugins: [
-            px2rem({
-              rootValue: 16,
-              selectorBlackList: ['html'],
-            }),
-          ],
-        },
-      },
-      {
-        loader: 'sass-loader',
-        options: {
-          minimize,
-          souceMap,
-        },
-      },
-    ],
-  })
+  },
+  {
+    loader: 'postcss-loader',
+    options: {
+      minimize,
+      souceMap,
+      plugins: [
+        px2rem({
+          rootValue: 16,
+          selectorBlackList: ['html'],
+        }),
+      ],
+    },
+  },
+  {
+    loader: 'sass-loader',
+    options: {
+      minimize,
+      souceMap,
+    },
+  },
+]
 
 export const babelLoader = isServer => ({
   test: /\.js$/,
@@ -127,10 +118,6 @@ export default {
   plugins: [
     new webpack.LoaderOptionsPlugin({
       context: __dirname,
-    }),
-    new ExtractTextWebpackPlugin({
-      disable: true, // app.css is too small (0.73 KB gzipped) for now, so disable it
-      filename: '[name].[contenthash].css',
     }),
     new FriendlyErrorsWebpackPlugin(),
     new webpack.DefinePlugin({

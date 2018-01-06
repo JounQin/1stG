@@ -2,14 +2,14 @@ import fs from 'fs'
 
 import _debug from 'debug'
 import Koa from 'koa'
-import cash from 'koa-cash'
 import compose from 'koa-compose'
 import compress from 'koa-compress'
-import convert from 'koa-convert'
 import logger from 'koa-logger'
 import serve from 'koa-static-cache'
-import LRU from 'lru-cache'
 import { createBundleRenderer } from 'react-server-renderer'
+
+import { version as koaVersion } from 'koa/package.json'
+import { version as reactSsrVersion } from 'react-server-renderer/package.json'
 
 import {
   __DEV__,
@@ -33,7 +33,10 @@ let ready, renderer
 
 const MAX_AGE = 1000 * 3600 * 24 * 365 // one year
 
-const cache = LRU(1000)
+const DEFAULT_HEADERS = {
+  'Content-Type': 'text/html',
+  Server: `koa/${koaVersion}; react-server-renderer/${reactSsrVersion}`,
+}
 
 const middlewares = [
   logger(),
@@ -41,11 +44,7 @@ const middlewares = [
     maxAge: MAX_AGE,
   }),
   async (ctx, next) => {
-    if (__DEV__) {
-      await ready
-    } else if (await ctx.cashed()) {
-      return
-    }
+    await ready
 
     if (
       ctx.method !== 'GET' ||
@@ -57,41 +56,15 @@ const middlewares = [
       return next()
     }
 
-    const context = { ctx, title: '1stG.me' }
+    if (ctx.path !== '/') {
+      return ctx.redirect('/')
+    }
 
-    ctx.respond = false
-
-    const { res } = ctx
-
-    renderer
-      .renderToStream(context)
+    ctx.body = renderer
+      .renderToStream({ ctx, title: '1stG.me' })
       .on('afterRender', () => {
-        ctx.status = context.code || 200
-        ctx.set({
-          'Content-Type': 'text/html',
-        })
+        ctx.set(DEFAULT_HEADERS)
       })
-      .on('error', e => {
-        const { status, url } = e
-
-        if (url) {
-          ctx.status = 302
-          ctx.set({ Location: url })
-          return res.end()
-        }
-
-        ctx.status = status || 500
-
-        switch (status) {
-          case 404:
-            return res.end('404 | Page Not Found')
-          default:
-            res.end('500 | Internal Server Error')
-            debug(`error during render : ${url}`)
-            debug(e.stack)
-        }
-      })
-      .pipe(res)
   },
 ]
 
@@ -133,12 +106,6 @@ if (__DEV__) {
         maxAge: MAX_AGE,
       },
       files,
-    ),
-    convert(
-      cash({
-        get: key => cache.get(key),
-        set: (key, value) => cache.set(key, value),
-      }),
     ),
   )
 

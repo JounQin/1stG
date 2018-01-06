@@ -1,6 +1,5 @@
 import React from 'react'
 import { hydrate } from 'react-dom'
-import { BrowserRouter } from 'react-router-dom'
 
 import App from 'App'
 
@@ -11,9 +10,7 @@ const AppContainer = __DEV__
 const render = () => {
   const app = (
     <AppContainer>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
+      <App />
     </AppContainer>
   )
 
