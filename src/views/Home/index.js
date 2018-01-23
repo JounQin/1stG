@@ -1,11 +1,19 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 import Grid from './Grid'
 
 import styles from './index.scss'
 
-const Home = () => (
-  <main className={styles.main}>
+const Home = ({ winWidth }) => (
+  <main
+    className={styles.main}
+    style={
+      winWidth && winWidth < 800
+        ? { transform: `scale(${winWidth / 800})` }
+        : null
+    }
+  >
     {[
       {
         title: 'GitHub',
@@ -33,5 +41,9 @@ const Home = () => (
     ].map((info, index) => <Grid key={index} {...info} />)}
   </main>
 )
+
+Home.propTypes = {
+  winWidth: PropTypes.number.isRequired,
+}
 
 export default Home

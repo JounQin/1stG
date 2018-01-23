@@ -76,8 +76,8 @@ export default {
   devtool: __DEV__ && 'cheap-module-source-map',
   resolve: {
     alias: {
-      react: 'anujs',
-      'react-dom': 'anujs',
+      // react: 'anujs',
+      // 'react-dom': 'anujs',
     },
     extensions: ['.js', '.scss'],
     modules: [resolve('src'), 'node_modules'],
