@@ -1,6 +1,6 @@
 # 1stG.me
 
-try to learn using React with server slide render deeply
+Server Rendered Static Homepage Website powered by Technology Stack Of React
 
 [![Greenkeeper badge](https://badges.greenkeeper.io/JounQin/1stg.svg)](https://greenkeeper.io/)
 [![Build Status](https://travis-ci.org/JounQin/1stg.svg?branch=master)](https://travis-ci.org/JounQin/1stg?branch=master)

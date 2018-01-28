@@ -1,7 +1,7 @@
 {
   "name": "1stg",
   "version": "0.0.1",
-  "description": "try to learn using React with server slide render deeply",
+  "description": "Server Rendered Static Homepage Website powered by Technology Stack Of React",
   "repository": "git@github.com:JounQin/1stg.git",
   "author": "JounQin <admin@1stg.me>",
   "license": "MIT",
