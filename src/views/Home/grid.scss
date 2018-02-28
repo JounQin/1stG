@@ -199,15 +199,15 @@ $bg-size: $content-size * 2;
   top: 50%;
   left: 50%;
   transform: translate3d(-50%, -50%, 0) rotate(-45deg);
-  width: $content-size;
-  height: $content-size;
+  // width: $content-size;
+  // height: $content-size;
   text-align: center;
 }
 
 .wrapper {
   position: absolute;
-  top: 50%;
-  left: 50%;
+  // top: 50%;
+  // left: 50%;
   transform: translate3d(-50%, -50%, 0);
 
   button {

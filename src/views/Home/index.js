@@ -5,15 +5,8 @@ import Grid from './Grid'
 
 import styles from './index.scss'
 
-const Home = ({ winWidth }) => (
-  <main
-    className={styles.main}
-    style={
-      winWidth && winWidth < 800
-        ? { transform: `scale(${winWidth / 800})` }
-        : null
-    }
-  >
+const Home = ({ style }) => (
+  <main className={styles.main} style={style}>
     {[
       {
         title: 'GitHub',
@@ -43,7 +36,7 @@ const Home = ({ winWidth }) => (
 )
 
 Home.propTypes = {
-  winWidth: PropTypes.number.isRequired,
+  style: PropTypes.object,
 }
 
 export default Home

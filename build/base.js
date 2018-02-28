@@ -1,13 +1,11 @@
 import webpack from 'webpack'
 import ExtractTextWebpackPlugin from 'extract-text-webpack-plugin'
 import FriendlyErrorsWebpackPlugin from 'friendly-errors-webpack-plugin'
-import px2rem from 'postcss-plugin-px2rem'
-import UglifyjsWebpackPlugin from 'uglifyjs-webpack-plugin'
 
 import { NODE_ENV, __DEV__, resolve } from './config'
 
-const souceMap = __DEV__
-const minimize = !souceMap
+const sourceMap = __DEV__
+const minimize = !sourceMap
 
 const cssLoaders = modules =>
   ExtractTextWebpackPlugin.extract({
@@ -17,7 +15,7 @@ const cssLoaders = modules =>
         loader: 'css-loader',
         options: {
           minimize,
-          souceMap,
+          sourceMap,
           modules,
           camelCase: true,
           importLoaders: 2,
@@ -29,21 +27,13 @@ const cssLoaders = modules =>
       {
         loader: 'postcss-loader',
         options: {
-          minimize,
-          souceMap,
-          plugins: [
-            px2rem({
-              rootValue: 16,
-              selectorBlackList: ['html'],
-            }),
-          ],
+          sourceMap,
         },
       },
       {
         loader: 'sass-loader',
         options: {
-          minimize,
-          souceMap,
+          sourceMap,
         },
       },
     ],
@@ -73,13 +63,16 @@ export const babelLoader = isServer => ({
 })
 
 export default {
+  mode: NODE_ENV,
   devtool: __DEV__ && 'cheap-module-source-map',
   resolve: {
-    alias: {
-      react: 'anujs',
-      'react-dom': 'anujs',
-      'prop-types': 'anujs/lib/ReactPropTypes',
-    },
+    alias: __DEV__
+      ? {}
+      : {
+          react: 'anujs',
+          'react-dom': 'anujs',
+          'prop-types': 'anujs/lib/ReactPropTypes',
+        },
     extensions: ['.js', '.scss'],
     modules: [resolve('src'), 'node_modules'],
   },
@@ -126,7 +119,6 @@ export default {
   },
   plugins: [
     new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify(NODE_ENV),
       __DEV__,
     }),
     new ExtractTextWebpackPlugin({
@@ -134,12 +126,5 @@ export default {
       filename: '[name].[contenthash].css',
     }),
     new FriendlyErrorsWebpackPlugin(),
-    ...(__DEV__
-      ? [new webpack.NamedModulesPlugin(), new webpack.NamedChunksPlugin()]
-      : [
-          new UglifyjsWebpackPlugin(),
-          new webpack.NoEmitOnErrorsPlugin(),
-          new webpack.optimize.ModuleConcatenationPlugin(),
-        ]),
   ],
 }

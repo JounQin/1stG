@@ -4,10 +4,12 @@ import 'styles/app'
 
 import Home from 'views/Home'
 
+const WIDTH_THRESHOLD = 900
+const HEIGHT_THRESHOLD = 600
+
 export default class App extends React.PureComponent {
   state = {
-    winWidth: 0,
-    winHeight: 0,
+    scale: null,
   }
 
   constructor(props) {
@@ -16,10 +18,16 @@ export default class App extends React.PureComponent {
   }
 
   resize() {
-    const docEl = document.documentElement
+    const { offsetWidth, offsetHeight } = document.documentElement
+
     this.setState({
-      winWidth: docEl.offsetWidth,
-      winHeight: docEl.offsetHeight,
+      scale:
+        offsetWidth < WIDTH_THRESHOLD || offsetHeight < HEIGHT_THRESHOLD
+          ? Math.min(
+              offsetWidth / WIDTH_THRESHOLD,
+              offsetHeight / HEIGHT_THRESHOLD,
+            )
+          : null,
     })
   }
 
@@ -33,8 +41,7 @@ export default class App extends React.PureComponent {
   }
 
   render() {
-    return (
-      <Home winHeight={this.state.winHeight} winWidth={this.state.winWidth} />
-    )
+    const { scale } = this.state
+    return <Home style={scale ? { transform: `scale(${scale})` } : null} />
   }
 }
