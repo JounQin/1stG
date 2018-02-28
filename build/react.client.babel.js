@@ -23,6 +23,10 @@ const clientConfig = merge.smart(base, {
     splitChunks: {
       chunks: 'all',
       name: 'vendors',
+      cacheGroups: {
+        test: ({ context, request }) =>
+          /node_modules/.test(context) && !/\.css$/.test(request),
+      },
     },
     runtimeChunk: {
       name: 'manifest',
@@ -41,7 +45,6 @@ const clientConfig = merge.smart(base, {
 
 if (!__DEV__) {
   clientConfig.plugins.push(
-    // auto generate service worker
     new SWPrecacheWebpackPlugin({
       cacheId: 'react-ssr',
       filename: 'service-worker.js',
