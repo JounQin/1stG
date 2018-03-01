@@ -100,7 +100,7 @@
     "html-minifier": "^3.5.9",
     "husky": "^0.14.3",
     "img-loader": "^2.0.1",
-    "koa-webpack": "^2.0.3",
+    "koa-webpack": "^3.0.0",
     "lint-staged": "^7.0.0",
     "node-sass": "^4.7.2",
     "normalize.css": "^8.0.0",
