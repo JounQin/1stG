@@ -28,7 +28,7 @@ const Home = ({ style }) => (
       {
         title: 'My Blog',
         text: 'Personal Website',
-        link: 'http://blog.1stg.me',
+        link: 'https://blog.1stg.me',
         className: 'blog',
       },
     ].map((info, index) => <Grid key={index} {...info} />)}
