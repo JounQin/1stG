@@ -63,11 +63,13 @@ export default {
   mode: NODE_ENV,
   devtool: __DEV__ && 'cheap-module-source-map',
   resolve: {
-    alias: {
-      react: 'anujs',
-      'react-dom': 'anujs',
-      'prop-types': 'anujs/lib/ReactPropTypes',
-    },
+    alias: __DEV__
+      ? {}
+      : {
+          react: 'anujs',
+          'react-dom': 'anujs',
+          'prop-types': 'anujs/lib/ReactPropTypes',
+        },
     extensions: ['.js', '.scss'],
     modules: [resolve('src'), 'node_modules'],
   },
