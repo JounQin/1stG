@@ -42,6 +42,6 @@ export default class App extends React.PureComponent {
 
   render() {
     const { scale } = this.state
-    return <Home style={scale ? { transform: `scale(${scale})` } : null} />
+    return <Home style={scale && { transform: `scale(${scale})` }} />
   }
 }
