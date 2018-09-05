@@ -18,7 +18,7 @@ main() {
     local CREATED=1
 
     {
-      git clone https://user:${GH_TOKEN}@github.com/JounQin/1stg.git sync -b gh-pages
+      git clone https://user:${GH_TOKEN}@github.com/$TRAVIS_REPO_SLUG.git sync -b gh-pages
     } || {
       echo "branch \`gh-pages\` has not been created"
       CREATED=0
@@ -26,7 +26,7 @@ main() {
       cd sync
       git init
       git checkout -b gh-pages
-      git remote add origin https://user:${GH_TOKEN}@github.com/JounQin/1stg.git
+      git remote add origin https://user:${GH_TOKEN}@github.com/$TRAVIS_REPO_SLUG.git
       cd ..
     }
 
@@ -36,6 +36,7 @@ main() {
     cp -rf ../dist/static/* .
     cp ../*.md .
     cp ../public/* .
+    echo www.1stg.me > CNAME
 
     git add -A
     git status -s |

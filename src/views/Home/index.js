@@ -31,7 +31,9 @@ const Home = ({ style }) => (
         link: 'https://blog.1stg.me',
         className: 'blog',
       },
-    ].map((info, index) => <Grid key={index} {...info} />)}
+    ].map((info, index) => (
+      <Grid key={index} {...info} />
+    ))}
   </main>
 )
 
