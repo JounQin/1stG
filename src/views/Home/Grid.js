@@ -1,6 +1,5 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import classNames from 'classnames'
 
 import Link from 'components/Link'
 
@@ -8,6 +7,8 @@ import styles from './grid.scss'
 
 import github from 'assets/github.webp'
 import githubFallback from 'assets/github.png'
+
+const classNames = classes => classes.join(' ')
 
 const Grid = ({ title, text, link, className }) => (
   <Link

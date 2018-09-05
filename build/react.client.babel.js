@@ -25,9 +25,9 @@ const clientConfig = merge.smart(base, {
     },
     splitChunks: {
       cacheGroups: {
-        chunks: 'initial',
-        name: 'vendors',
         vendors: {
+          chunks: 'initial',
+          name: 'vendors',
           test: /node_modules/,
         },
       },
