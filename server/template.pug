@@ -3,15 +3,18 @@ html(lang="en")
     title {{ title }}
     meta(charset="UTF-8")
     meta(http-equiv="X-UA-Compatible", content="ie=edge")
-    meta(name="description" content="try to learn using React with server slide render deeply")
+    meta(name="description" content="{{ title }}")
     meta(name="viewport" content="width=device-width, initial-scale=1")
     script.
       (function() {
+        var docEl = document.documentElement
         var canvas = document.createElement('canvas')
         canvas.width = canvas.height = 1
         if (canvas.toDataURL && canvas.toDataURL('image/webp').indexOf('image/webp') === 5) {
-          document.documentElement.classList.add('webp')
+          docEl.classList.add('webp')
         }
+        docEl.style.fontSize = docEl.offsetWidth < 900 || docEl.offsetHeight < 600
+          ? Math.min(docEl.offsetWidth / 900,  docEl.offsetHeight / 600) * 100 + 'px' : null
       })()
     style.
       #skip a {

@@ -7,22 +7,21 @@
   background: transparent;
 }
 
-:root,
+html,
 body,
 #app {
   height: 100%;
 }
 
 html {
+  font-size: 100px;
+}
+
+body {
   font-size: 14px;
 }
 
 #app {
-  position: relative;
-  margin: 0 auto;
-  overflow-x: hidden;
-  overflow-y: auto;
-  scroll-behavior: smooth;
   background-image: radial-gradient(
     circle,
     #f9fcff 20%,

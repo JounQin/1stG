@@ -5,8 +5,8 @@ import Grid from './Grid'
 
 import styles from './index.scss'
 
-const Home = ({ style }) => (
-  <main className={styles.main} style={style}>
+const Home = () => (
+  <main className={styles.main}>
     {[
       {
         title: 'GitHub',

@@ -61,10 +61,11 @@ const middlewares = [
     }
 
     ctx.body = renderer
-      .renderToStream({ ctx, title: '1stG.me' })
-      .on('afterRender', () => {
-        ctx.set(DEFAULT_HEADERS)
+      .renderToStream({
+        ctx,
+        title: '轮子主义初级阶段 v0.0.1 - Write Less, Think More',
       })
+      .on('afterRender', () => ctx.set(DEFAULT_HEADERS))
   },
 ]
 
