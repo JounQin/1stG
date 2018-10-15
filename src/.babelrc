@@ -1,27 +1,24 @@
 {
-  presets: [
+  "presets": [
     [
-      '@babel/env',
+      "@babel/env",
       {
-        modules: false,
-      },
+        "modules": false
+      }
     ],
-    '@babel/react',
+    "@babel/react"
   ],
-  plugins: [
-    '@babel/proposal-class-properties',
-    'react-hot-loader/babel',
-  ],
-  env: {
-    production: {
-      plugins: [
+  "plugins": ["@babel/proposal-class-properties", "react-hot-loader/babel"],
+  "env": {
+    "production": {
+      "plugins": [
         [
-          'transform-react-remove-prop-types',
+          "transform-react-remove-prop-types",
           {
-            removeImport: true,
-          },
-        ],
-      ],
-    },
-  },
+            "removeImport": true
+          }
+        ]
+      ]
+    }
+  }
 }

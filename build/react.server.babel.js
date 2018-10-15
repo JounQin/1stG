@@ -1,7 +1,7 @@
 import webpack from 'webpack'
 import merge from 'webpack-merge'
 import nodeExternals from 'webpack-node-externals'
-import { SSRServerPlugin } from 'ssr-webpack-plugin'
+import { ReactSSRServerPlugin } from 'react-server-renderer/server-plugin'
 
 import { publicPath, resolve } from './config'
 
@@ -27,6 +27,6 @@ export default merge.smart(base, {
       'process.env.REACT_ENV': '"server"',
       __SERVER__: true,
     }),
-    new SSRServerPlugin(),
+    new ReactSSRServerPlugin(),
   ],
 })
