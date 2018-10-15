@@ -77,7 +77,7 @@
     "koa-static-cache": "^5.1.2",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
-    "react-server-renderer": "^0.3.0"
+    "react-server-renderer": "^1.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.1.2",
