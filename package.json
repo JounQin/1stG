@@ -70,7 +70,7 @@
     "anujs": "^1.4.9",
     "cross-env": "^5.2.0",
     "debug": "^4.1.1",
-    "koa": "^2.6.2",
+    "koa": "^2.7.0",
     "koa-compose": "^4.1.0",
     "koa-compress": "^3.0.0",
     "koa-logger": "^3.2.0",
