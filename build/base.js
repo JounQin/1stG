@@ -66,6 +66,7 @@ export default {
       : {
           react: 'anujs',
           'react-dom': 'anujs',
+          'react-dom/server': 'anujs/dist/React/server',
           'prop-types': 'anujs/lib/ReactPropTypes',
         },
     extensions: ['.js', '.scss'],
