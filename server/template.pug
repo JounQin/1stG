@@ -1,0 +1,36 @@
+html(lang="en")
+  head
+    title {{ title }}
+    meta(charset="UTF-8")
+    meta(http-equiv="X-UA-Compatible", content="ie=edge")
+    meta(name="description" content="{{ title }}")
+    meta(name="viewport" content="width=device-width, initial-scale=1")
+    script.
+      (function() {
+        var docEl = document.documentElement
+        var canvas = document.createElement('canvas')
+        canvas.width = canvas.height = 1
+        if (canvas.toDataURL && canvas.toDataURL('image/webp').indexOf('image/webp') === 5) {
+          docEl.classList.add('webp')
+        }
+        docEl.style.fontSize = docEl.offsetWidth < 900 || docEl.offsetHeight < 600
+          ? Math.min(docEl.offsetWidth / 900,  docEl.offsetHeight / 600) * 100 + 'px' : null
+      })()
+    style.
+      #skip a {
+         position: absolute;
+         left: -10000px;
+         top: auto;
+         width: 1px;
+         height:1 px;
+         overflow: hidden;
+      }
+      #skip a:focus {
+         position:static;
+         width:auto;
+         height:auto;
+       }
+  body
+    #skip
+      a(href="#app") skip to content
+    #app

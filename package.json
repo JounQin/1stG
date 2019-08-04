@@ -1,0 +1,132 @@
+{
+  "name": "1stg",
+  "version": "0.0.1",
+  "description": "Server Rendered Static Homepage Website powered by Technology Stack Of React",
+  "repository": "git@github.com:JounQin/1stg.git",
+  "author": "JounQin <admin@1stg.me>",
+  "license": "MIT",
+  "scripts": {
+    "dev": "cross-env DEBUG=1stg:* NODE_ENV=development babel-node server",
+    "build:react:client": "webpack --config=build/react.client.babel.js --colors --progress",
+    "build:react:server": "webpack --config=build/react.server.babel.js --colors --progress",
+    "build:server": "webpack --config build/server.babel.js --colors --progress",
+    "build:template": "mkdir -p dist/static && node build/template.js",
+    "build": "rimraf dist && cross-env DEBUG=1stg:* NODE_ENV=production run-p build:react:client build:react:server build:server build:template",
+    "start": "cross-env DEBUG=1stg:* NODE_ENV=production node dist/server",
+    "sync:static": "bash build/sync-static.sh",
+    "lint": "cross-env EFF_NO_LINK_RULES=true eslint . --max-warnings=10 -f friendly"
+  },
+  "dependencies": {
+    "anujs": "^1.5.7",
+    "cross-env": "^5.2.0",
+    "debug": "^4.1.1",
+    "koa": "^2.7.0",
+    "koa-compose": "^4.1.0",
+    "koa-compress": "^3.0.0",
+    "koa-logger": "^3.2.1",
+    "koa-static-cache": "^5.1.2",
+    "prettier-config-1stg": "^0.1.0",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "react-server-renderer": "^1.2.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.5.5",
+    "@babel/node": "^7.5.5",
+    "@babel/plugin-proposal-class-properties": "^7.5.5",
+    "@babel/preset-env": "^7.5.5",
+    "@babel/preset-react": "^7.0.0",
+    "@babel/register": "^7.5.5",
+    "autoprefixer": "^9.6.1",
+    "babel-eslint": "^10.0.2",
+    "babel-loader": "^8.0.6",
+    "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
+    "css-loader": "^3.1.0",
+    "cssnano": "^4.1.10",
+    "eslint": "^6.1.0",
+    "eslint-config-1stg": "^4.2.3",
+    "eslint-formatter-friendly": "^7.0.0",
+    "eslint-import-resolver-webpack": "^0.11.1",
+    "file-loader": "^4.1.0",
+    "friendly-errors-webpack-plugin": "^1.7.0",
+    "html-minifier": "^4.0.0",
+    "husky": "^3.0.2",
+    "imagemin": "^7.0.0",
+    "img-loader": "^3.0.1",
+    "koa-webpack": "^5.2.4",
+    "lint-staged": "^9.2.1",
+    "mini-css-extract-plugin": "^0.8.0",
+    "normalize.css": "^8.0.1",
+    "npm-run-all": "^4.1.5",
+    "postcss-loader": "^3.0.0",
+    "postcss-plugin-px2rem": "^0.8.1",
+    "prettier": "^1.18.2",
+    "prop-types": "^15.6.2",
+    "pug": "^2.0.4",
+    "pug-plain-loader": "^1.0.0",
+    "react-hot-loader": "^4.12.10",
+    "react-style-loader": "^2.3.0",
+    "rimraf": "^2.6.3",
+    "sass": "^1.22.9",
+    "sass-loader": "webpack-contrib/sass-loader",
+    "sw-precache-webpack-plugin": "^0.11.5",
+    "url-loader": "^2.1.0",
+    "webpack": "^4.39.1",
+    "webpack-cli": "^3.3.6",
+    "webpack-merge": "^4.2.1",
+    "webpack-node-externals": "^1.7.2"
+  },
+  "babel": {
+    "presets": [
+      "@babel/env"
+    ]
+  },
+  "browserslist": "> 1% in CN",
+  "eslintIgnore": [
+    "dist",
+    "node_modules",
+    "sync"
+  ],
+  "eslintConfig": {
+    "extends": [
+      "1stg/react"
+    ],
+    "settings": {
+      "import/resolver": {
+        "webpack": {
+          "config": "build/webpack.js"
+        }
+      }
+    },
+    "env": {
+      "browser": true,
+      "node": true,
+      "es6": true
+    },
+    "globals": {
+      "__DEV__": false,
+      "__SERVER__": false
+    }
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{json,md,scss}": [
+      "prettier --write",
+      "git add"
+    ],
+    "*.js": [
+      "cross-env EFF_NO_LINK_RULES=true eslint --max-warnings=10 -f friendly --fix",
+      "git add"
+    ]
+  },
+  "prettier": "prettier-config-1stg",
+  "renovate": {
+    "extends": [
+      "1stg"
+    ]
+  }
+}

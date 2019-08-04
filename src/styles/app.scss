@@ -1,0 +1,40 @@
+@import '~normalize.css';
+
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  display: none;
+  background: transparent;
+}
+
+html,
+body,
+#app {
+  height: 100%;
+}
+
+html {
+  font-size: 100px;
+}
+
+body {
+  font-size: 14px;
+}
+
+#app {
+  background-image: radial-gradient(
+    circle,
+    #f9fcff 20%,
+    #e2eff7 50%,
+    #b1d4e7 100%
+  );
+}
+
+a {
+  &,
+  &:active,
+  &:hover,
+  &:visited {
+    text-decoration: none;
+  }
+}
