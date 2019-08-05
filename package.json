@@ -1,6 +1,6 @@
 {
   "name": "1stg",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Server Rendered Static Homepage Website powered by Technology Stack Of React",
   "repository": "git@github.com:JounQin/1stg.git",
   "author": "JounQin <admin@1stg.me>",
@@ -61,7 +61,7 @@
     "postcss-loader": "^3.0.0",
     "postcss-plugin-px2rem": "^0.8.1",
     "prettier": "^1.18.2",
-    "prop-types": "^15.6.2",
+    "prop-types": "^15.7.2",
     "pug": "^2.0.4",
     "pug-plain-loader": "^1.0.0",
     "react-hot-loader": "^4.12.10",
