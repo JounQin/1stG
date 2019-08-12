@@ -1159,10 +1159,10 @@ ansi-styles@^3.2.0, ansi-styles@^3.2.1:
   dependencies:
     color-convert "^1.9.0"
 
-anujs@^1.5.7:
-  version "1.5.7"
-  resolved "https://registry.yarnpkg.com/anujs/-/anujs-1.5.7.tgz#303aee92e29c0875df262f9f064128eeda926291"
-  integrity sha512-XHQztVKAqW+0m/Ujf2Hfa5MwOWvqI1iPhD6lUMvkVa2f9mRmFOar/Ohr1O27uuQxhm7SnyQiB3Tg0DzULAYpqA==
+anujs@^1.5.9:
+  version "1.5.9"
+  resolved "https://registry.yarnpkg.com/anujs/-/anujs-1.5.9.tgz#817ae63f01c5407675a2fbffc2641ebc89f8f983"
+  integrity sha512-22AemmyijAfhiPR6o6JQ3xil9P60OUFHwJhG7iSnVbrCUqu4YFHWygPJbDrgr8OC7ZwOtysLyyfafUuYVmfZ5w==
   dependencies:
     "@rematch/core" "^1.0.0-alpha.9"
     html-minifier "^3.5.20"

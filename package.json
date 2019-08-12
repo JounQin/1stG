@@ -17,7 +17,7 @@
     "lint": "cross-env EFF_NO_LINK_RULES=true eslint . --max-warnings=10 -f friendly"
   },
   "dependencies": {
-    "anujs": "^1.5.7",
+    "anujs": "^1.5.9",
     "cross-env": "^5.2.0",
     "debug": "^4.1.1",
     "koa": "^2.7.0",
