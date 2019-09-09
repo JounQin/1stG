@@ -72,7 +72,7 @@
     "sw-precache-webpack-plugin": "^0.11.5",
     "url-loader": "^2.1.0",
     "webpack": "^4.39.3",
-    "webpack-cli": "^3.3.7",
+    "webpack-cli": "^3.3.8",
     "webpack-merge": "^4.2.2",
     "webpack-node-externals": "^1.7.2"
   },
