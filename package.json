@@ -64,7 +64,7 @@
     "prop-types": "^15.7.2",
     "pug": "^2.0.4",
     "pug-plain-loader": "^1.0.0",
-    "react-hot-loader": "^4.12.14",
+    "react-hot-loader": "^4.12.15",
     "react-style-loader": "^2.3.0",
     "rimraf": "^2.7.1",
     "sass": "^1.22.12",
