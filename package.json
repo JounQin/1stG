@@ -54,7 +54,7 @@
     "imagemin": "^7.0.0",
     "img-loader": "^3.0.1",
     "koa-webpack": "^5.2.4",
-    "lint-staged": "^9.4.2",
+    "lint-staged": "^9.4.3",
     "mini-css-extract-plugin": "^0.8.0",
     "normalize.css": "^8.0.1",
     "npm-run-all": "^4.1.5",
