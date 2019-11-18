@@ -50,7 +50,7 @@
     "file-loader": "^4.2.0",
     "friendly-errors-webpack-plugin": "^1.7.0",
     "html-minifier": "^4.0.0",
-    "husky": "^3.0.9",
+    "husky": "^3.1.0",
     "imagemin": "^7.0.1",
     "img-loader": "^3.0.1",
     "koa-webpack": "^5.2.4",
