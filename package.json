@@ -71,7 +71,7 @@
     "sass-loader": "webpack-contrib/sass-loader",
     "sw-precache-webpack-plugin": "^0.11.5",
     "url-loader": "^2.3.0",
-    "webpack": "^4.41.4",
+    "webpack": "^4.41.5",
     "webpack-cli": "^3.3.10",
     "webpack-merge": "^4.2.2",
     "webpack-node-externals": "^1.7.2"
