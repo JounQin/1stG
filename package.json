@@ -1,20 +1,25 @@
 {
   "name": "1stg",
-  "version": "0.0.2",
+  "version": "0.0.0",
   "description": "Server Rendered Static Homepage Website powered by Technology Stack Of React",
   "repository": "git@github.com:JounQin/1stg.git",
   "author": "JounQin <admin@1stg.me>",
   "license": "MIT",
+  "private": true,
+  "engines": {
+    "node": "12.x"
+  },
   "scripts": {
     "build": "rimraf dist && cross-env DEBUG=1stg:* NODE_ENV=production run-p build:**",
     "build:react:client": "webpack --config=build/react.client.babel.js --colors --progress",
     "build:react:server": "webpack --config=build/react.server.babel.js --colors --progress",
     "build:server": "webpack --config build/server.babel.js --colors --progress",
     "build:template": "node build/template.js",
-    "dev": "cross-env DEBUG=1stg:* NODE_ENV=development babel-node server",
+    "dev": "cross-env DEBUG=1stg:* babel-node server",
     "lint": "cross-env EFF_NO_LINK_RULES=true eslint . --cache --max-warnings=10 -f friendly",
+    "now-build": "sh build/now.sh",
     "postinstall": "yarn-deduplicate || exit 0",
-    "start": "cross-env DEBUG=1stg:* NODE_ENV=production node dist/server"
+    "start": "cross-env DEBUG=1stg:* node dist/server"
   },
   "dependencies": {
     "anujs": "^1.6.0",

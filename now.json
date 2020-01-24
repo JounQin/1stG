@@ -1,0 +1,19 @@
+{
+  "name": "1stg",
+  "version": 2,
+  "alias": [
+    "www.1stG.me"
+  ],
+  "github": {
+    "silent": true
+  },
+  "builds": [
+    {
+      "src": "package.json",
+      "use": "@now/static-build",
+      "config": {
+        "outputDirectory": "dist/static"
+      }
+    }
+  ]
+}
