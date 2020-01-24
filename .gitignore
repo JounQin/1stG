@@ -1,4 +1,4 @@
+*.log
+.*cache
 dist
 node_modules
-sync
-*.log

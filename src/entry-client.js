@@ -1,10 +1,10 @@
 import React from 'react'
-import { hydrate } from 'react-dom'
 
+import { hydrate } from 'react-dom'
 import App from 'App'
 
 if (__DEV__) {
-  hydrate(<App />, document.getElementById('app'))
+  hydrate(<App />, document.querySelector('#app'))
 }
 
 if (

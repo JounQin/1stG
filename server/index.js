@@ -85,6 +85,7 @@ if (process.env.NODE_ENV === 'development') {
     },
   )
   ready = readyPromise
+  // eslint-disable-next-line promise/catch-or-return
   webpackMiddlewarePromise.then(webpackMiddleware => app.use(webpackMiddleware))
 } else {
   renderer = createRenderer(

@@ -37,14 +37,18 @@ export default done => {
     stats.errors.forEach(debug)
     stats.warnings.forEach(debug)
 
-    if (stats.errors.length) return
+    if (stats.errors.length > 0) {
+      return
+    }
 
+    // eslint-disable-next-line promise/catch-or-return
     webpackMiddlewarePromise.then(webpackMiddleware => {
       fs = webpackMiddleware.devMiddleware.fileSystem
       clientManifest = JSON.parse(
         fs.readFileSync(resolve('dist/react-ssr-client-manifest.json')),
       )
 
+      // eslint-disable-next-line promise/always-return
       if (bundle) {
         ready({ bundle, clientManifest, fs })
       }
@@ -58,7 +62,9 @@ export default done => {
   serverCompiler.watch({}, (err, stats) => {
     if (err) throw err
     stats = stats.toJson()
-    if (stats.errors.length) return
+    if (stats.errors.length > 0) {
+      return
+    }
 
     bundle = JSON.parse(
       mfs.readFileSync(resolve('dist/react-ssr-server-bundle.json')),

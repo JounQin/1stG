@@ -36,7 +36,7 @@ const cssLoaders = modules => [
 ]
 
 export const babelLoader = isServer => ({
-  test: /\.js$/,
+  test: /\.jsx?$/,
   loader: 'babel-loader',
   exclude: /node_modules/,
   options: {
@@ -44,16 +44,15 @@ export const babelLoader = isServer => ({
     ...(isServer && {
       presets: [
         [
-          '@babel/env',
+          '@1stg',
           {
             modules: false,
-            exclude: [
-              'babel-plugin-transform-async-to-generator',
-              'babel-plugin-transform-regenerator',
-            ],
+            react: true,
+            isTSX: true,
           },
         ],
       ],
+      babelrc: false,
     }),
   },
 })
@@ -62,7 +61,9 @@ export default {
   mode: NODE_ENV,
   resolve: {
     alias: __DEV__
-      ? {}
+      ? {
+          'react-dom': '@hot-loader/react-dom',
+        }
       : {
           react: 'anujs',
           'react-dom': 'anujs',
@@ -80,6 +81,7 @@ export default {
           {
             loader: 'url-loader',
             options: {
+              // eslint-disable-next-line no-magic-numbers
               limit: 1024 * 8,
             },
           },

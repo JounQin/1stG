@@ -23,9 +23,10 @@ const resize = () => {
 
 const useResize = () =>
   useEffect(() => {
+    resize()
     addEventListener('resize', resize)
     return () => removeEventListener('resize', resize)
-  })
+  }, [])
 
 const App = () => {
   useResize()
