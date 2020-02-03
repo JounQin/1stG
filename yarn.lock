@@ -7057,10 +7057,10 @@ koa-static-cache@^5.1.2:
     mime-types "^2.1.8"
     mz "^2.7.0"
 
-koa-webpack@^5.2.5:
-  version "5.2.5"
-  resolved "https://registry.yarnpkg.com/koa-webpack/-/koa-webpack-5.2.5.tgz#d6855bed7cf14b8e16baff07d7e058a30338bbc5"
-  integrity sha512-0+Wn8dHRoKqORybYYROb4aYfpHXg+TqfxTgwxcWHgRIrPi3SLMf6pzvlgYBPWXULAN1cW1tGCh1iXho2Ez6E3Q==
+koa-webpack@^5.3.0:
+  version "5.3.0"
+  resolved "https://registry.yarnpkg.com/koa-webpack/-/koa-webpack-5.3.0.tgz#b95bd83283ff665088f0ebdd10d47fc6857a9cbc"
+  integrity sha512-dAZ1Dpv5anpoKijjKHwxUv5nMumreEZtCvqneRlSltWXviJ7KiilwveuK2BMudrRsg8kWq52mo8ETR+VewE6Cg==
   dependencies:
     "@hapi/joi" "^15.0.0"
     app-root-path "^2.0.1"
