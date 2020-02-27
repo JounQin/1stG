@@ -37,7 +37,7 @@
     "react-server-renderer": "^1.2.0"
   },
   "devDependencies": {
-    "@1stg/app-config": "^0.1.21",
+    "@1stg/app-config": "^0.1.23",
     "@babel/node": "^7.8.3",
     "@babel/register": "^7.8.3",
     "@hot-loader/react-dom": "^16.11.0",
