@@ -4,6 +4,8 @@ import PropTypes from 'prop-types'
 import { Grid } from './Grid'
 import styles from './index.scss'
 
+import { ExternalLink } from 'components/ExternalLink'
+
 const GRIDS = [
   {
     title: 'GitHub',
@@ -35,6 +37,12 @@ export const Home = () => (
     {GRIDS.map((info, index) => (
       <Grid key={index} {...info} />
     ))}
+    <div className={styles.record}>
+      <ExternalLink href="http://www.beian.miit.gov.cn/">
+        苏ICP备16035271号
+      </ExternalLink>{' '}
+      | Copyright 1992 - present JounQin. All Rights Reserved
+    </div>
   </main>
 )
 

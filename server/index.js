@@ -11,6 +11,7 @@ import { version as koaVersion } from 'koa/package.json'
 import { version as reactSsrVersion } from 'react-server-renderer/package.json'
 
 import {
+  __DEV__,
   resolve,
   runtimeRequire,
   serverHost,
@@ -19,12 +20,11 @@ import {
 
 const debug = _debug('1stg:server')
 
-const template =
-  process.env.NODE_ENV === 'development'
-    ? require('pug').renderFile(resolve('server/template.pug'), {
-        pretty: true,
-      })
-    : fs.readFileSync(resolve('dist/template.html'), 'utf-8')
+const template = __DEV__
+  ? require('pug').renderFile(resolve('server/template.pug'), {
+      pretty: true,
+    })
+  : fs.readFileSync(resolve('dist/template.html'), 'utf-8')
 
 const app = new Koa()
 
@@ -76,7 +76,7 @@ const createRenderer = (bundle, options) =>
     runInNewContext: false,
   })
 
-if (process.env.NODE_ENV === 'development') {
+if (__DEV__) {
   const { readyPromise, webpackMiddlewarePromise } = require('./dev').default(
     ({ bundle, clientManifest }) => {
       renderer = createRenderer(bundle, {

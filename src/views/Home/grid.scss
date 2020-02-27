@@ -6,30 +6,81 @@
   @return -1 * $number;
 }
 
-@function sqrt($square, $tolerance: 0.001, $estimate: $square/2) {
+@function sqrt($square, $tolerance: 0.001, $estimate: $square / 2) {
   @if abs($square - $estimate * $estimate) < $tolerance {
     @return $estimate;
   }
 
-  @return sqrt($square, $tolerance, ($estimate + $square/$estimate)/2);
+  @return sqrt($square, $tolerance, ($estimate + $square / $estimate) / 2);
 }
 
 $grid-size: 320px;
 $content-size: round($grid-size / sqrt(2));
 $bg-size: $content-size * 2;
 
-:global(.webp) {
-  .rubick:after {
-    background-image: url('~assets/site1.webp');
-  }
+.wrapper {
+  position: absolute;
+  transform: translate3d(-50%, -50%, 0);
 
-  .react-hn:after {
-    background-image: url('~assets/site2.webp');
-  }
+  button {
+    padding: 0 40px;
+    border: 1px solid #fff;
+    border-radius: 0;
+    height: 50px;
+    margin-top: 10px;
+    // stylelint-disable-next-line plugin/no-low-performance-animation-properties
+    transition: all 1s linear;
+    color: inherit;
+    background-color: transparent;
+    cursor: inherit;
+    white-space: nowrap;
 
-  .blog:after {
-    background-image: url('~assets/site3.webp');
+    @media (max-width: 500px) {
+      padding: 0 20px;
+    }
   }
+}
+
+.border {
+  position: absolute;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.5);
+  // stylelint-disable-next-line plugin/no-low-performance-animation-properties
+  transition: all 1s linear;
+}
+
+.border-t,
+.border-b {
+  height: 1px;
+}
+
+.border-r,
+.border-l {
+  width: 1px;
+}
+
+.border-t {
+  top: 8px;
+  right: 100%;
+  left: 8px;
+}
+
+.border-b {
+  bottom: 8px;
+  right: 8px;
+  left: 100%;
+}
+
+.border-r {
+  top: 8px;
+  bottom: 100%;
+  right: 8px;
+}
+
+.border-l {
+  top: 100%;
+  bottom: 8px;
+  left: 8px;
 }
 
 .grid {
@@ -44,7 +95,7 @@ $bg-size: $content-size * 2;
 
   button {
     &:active,
-    &:focuse,
+    &:focus,
     &:hover {
       outline: none;
       box-shadow: none;
@@ -154,44 +205,18 @@ $bg-size: $content-size * 2;
   }
 }
 
-.border {
-  position: absolute;
-  overflow: hidden;
-  background: rgba(255, 255, 255, 0.5);
-  transition: all 1s linear;
-}
-.border-t,
-.border-b {
-  height: 1px;
-}
+:global(.webp) {
+  .rubick:after {
+    background-image: url('~assets/site1.webp');
+  }
 
-.border-r,
-.border-l {
-  width: 1px;
-}
+  .react-hn:after {
+    background-image: url('~assets/site2.webp');
+  }
 
-.border-t {
-  top: 8px;
-  right: 100%;
-  left: 8px;
-}
-
-.border-b {
-  bottom: 8px;
-  right: 8px;
-  left: 100%;
-}
-
-.border-r {
-  top: 8px;
-  bottom: 100%;
-  right: 8px;
-}
-
-.border-l {
-  top: 100%;
-  bottom: 8px;
-  left: 8px;
+  .blog:after {
+    background-image: url('~assets/site3.webp');
+  }
 }
 
 .content {
@@ -200,26 +225,4 @@ $bg-size: $content-size * 2;
   left: 50%;
   transform: translate3d(-50%, -50%, 0) rotate(-45deg);
   text-align: center;
-}
-
-.wrapper {
-  position: absolute;
-  transform: translate3d(-50%, -50%, 0);
-
-  button {
-    padding: 0 40px;
-    border: 1px solid #fff;
-    border-radius: 0;
-    height: 50px;
-    margin-top: 10px;
-    transition: all 1s linear;
-    color: inherit;
-    background-color: transparent;
-    cursor: inherit;
-    white-space: nowrap;
-
-    @media (max-width: 500px) {
-      padding: 0 20px;
-    }
-  }
 }
