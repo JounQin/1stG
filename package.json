@@ -70,7 +70,7 @@
     "webpack-cli": "^3.3.11",
     "webpack-merge": "^4.2.2",
     "webpack-node-externals": "^1.7.2",
-    "yarn-deduplicate": "^1.1.1"
+    "yarn-deduplicate": "^2.1.1"
   },
   "resolutions": {
     "@babel/core": "^7.8.4",
