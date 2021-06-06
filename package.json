@@ -40,10 +40,10 @@
   },
   "devDependencies": {
     "@1stg/app-config": "^0.4.3",
-    "@babel/node": "^7.8.4",
-    "@babel/register": "^7.8.3",
+    "@babel/node": "^7.14.2",
+    "@babel/register": "^7.13.16",
     "@hot-loader/react-dom": "^16.12.0",
-    "babel-loader": "^8.0.6",
+    "babel-loader": "^8.2.2",
     "css-loader": "^3.4.2",
     "eslint-import-resolver-webpack": "^0.12.1",
     "file-loader": "^5.1.0",
@@ -73,7 +73,7 @@
     "yarn-deduplicate": "^1.1.1"
   },
   "resolutions": {
-    "@babel/core": "^7.8.4",
+    "@babel/core": "^7.14.3",
     "imagemin-gifsicle": "^6.0.1"
   }
 }
