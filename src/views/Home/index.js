@@ -38,7 +38,7 @@ export const Home = () => (
       <Grid key={index} {...info} />
     ))}
     <div className={styles.record}>
-      <ExternalLink href="http://www.beian.miit.gov.cn/">
+      <ExternalLink href="https://beian.miit.gov.cn">
         苏ICP备16035271号
       </ExternalLink>{' '}
       | Copyright 1992 - present JounQin. All Rights Reserved
