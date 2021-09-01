@@ -24,7 +24,7 @@
     "start": "cross-env DEBUG=1stg:* node dist/server"
   },
   "dependencies": {
-    "anujs": "^1.6.0",
+    "anujs": "^1.7.5",
     "core-js": "^3.6.4",
     "cross-env": "^7.0.0",
     "debug": "^4.1.1",
