@@ -2397,10 +2397,10 @@ ansi-styles@^4.1.0:
     "@types/color-name" "^1.1.1"
     color-convert "^2.0.1"
 
-anujs@^1.6.0:
-  version "1.6.0"
-  resolved "https://registry.yarnpkg.com/anujs/-/anujs-1.6.0.tgz#db5cfc4bb8993bf2eef44f868eacaed47ac0b6a1"
-  integrity sha512-5TKvujnN1F+Ii5OK/rBdjWko2W36qe6mve1WKl2y1VtuK33HgFkIunSVpvNyONFXN8Ybb1+neEELh1BKrYeniw==
+anujs@^1.7.5:
+  version "1.7.5"
+  resolved "https://registry.yarnpkg.com/anujs/-/anujs-1.7.5.tgz#20e824514873baa01f555d5cc7b02f6ece6ddee7"
+  integrity sha512-f9prXaPkF40lE4oAPBx33NBJB8zVAbHtjpbikLkz9q1gS+PdDySP20CTcEMpnm/uqquGXXS/+qDC8ts52KlAwg==
   dependencies:
     "@rematch/core" "^1.0.0-alpha.9"
     html-minifier "^3.5.20"
