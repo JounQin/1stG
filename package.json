@@ -25,7 +25,7 @@
   },
   "dependencies": {
     "anujs": "^1.7.5",
-    "core-js": "^3.18.1",
+    "core-js": "^3.19.2",
     "cross-env": "^7.0.0",
     "debug": "^4.1.1",
     "koa": "^2.11.0",
