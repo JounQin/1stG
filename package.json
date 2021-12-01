@@ -27,7 +27,7 @@
     "anujs": "^1.7.5",
     "core-js": "^3.19.2",
     "cross-env": "^7.0.0",
-    "debug": "^4.1.1",
+    "debug": "^4.3.3",
     "koa": "^2.11.0",
     "koa-compose": "^4.1.0",
     "koa-compress": "^3.0.0",
