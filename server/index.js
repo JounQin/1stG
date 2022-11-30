@@ -62,7 +62,7 @@ const middlewares = [
     ctx.body = renderer
       .renderToStream({
         ctx,
-        title: '轮子主义初级阶段 v0.0.1 - Write Less, Think More',
+        title: '家忍的个人网站',
       })
       .on('afterRender', () => ctx.set(DEFAULT_HEADERS))
   },
