@@ -28,7 +28,7 @@
     "core-js": "^3.33.2",
     "cross-env": "^7.0.3",
     "debug": "^4.3.4",
-    "koa": "^2.11.0",
+    "koa": "^2.14.2",
     "koa-compose": "^4.1.0",
     "koa-compress": "^3.0.0",
     "koa-logger": "^3.2.1",
