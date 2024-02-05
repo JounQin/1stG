@@ -32,7 +32,7 @@
     "koa-compose": "^4.1.0",
     "koa-compress": "^3.1.0",
     "koa-logger": "^3.2.1",
-    "koa-static-cache": "^5.1.2",
+    "koa-static-cache": "^5.1.4",
     "memory-fs": "^0.5.0",
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
