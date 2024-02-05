@@ -15,13 +15,13 @@ const GRIDS = [
   {
     title: 'Rubick',
     text: 'Vue SSR + TS',
-    link: 'https://rubick.1stg.me/',
+    link: 'https://rubick.1stg.me',
     className: 'rubick',
   },
   {
     title: 'React Hackernews',
     text: 'View React HN',
-    link: 'https://react-hn.now.sh',
+    link: 'https://react-hn.1stg.me',
     className: 'react-hn',
   },
   {
