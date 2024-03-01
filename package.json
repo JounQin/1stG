@@ -60,7 +60,7 @@
     "pug": "^3.0.0",
     "pug-plain-loader": "^1.0.0",
     "react-hot-loader": "^4.13.1",
-    "react-style-loader": "^2.3.0",
+    "react-style-loader": "^2.4.1",
     "rimraf": "^3.0.2",
     "sass": "^1.69.5",
     "sass-loader": "^8.0.2",
