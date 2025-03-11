@@ -40,8 +40,8 @@
   },
   "devDependencies": {
     "@1stg/app-config": "^0.4.3",
-    "@babel/node": "^7.8.4",
-    "@babel/register": "^7.8.3",
+    "@babel/node": "^7.26.0",
+    "@babel/register": "^7.25.9",
     "@hot-loader/react-dom": "^16.14.0",
     "babel-loader": "^8.3.0",
     "css-loader": "^3.6.0",
@@ -73,7 +73,7 @@
     "yarn-deduplicate": "^1.1.1"
   },
   "resolutions": {
-    "@babel/core": "^7.8.4",
+    "@babel/core": "^7.26.10",
     "imagemin-gifsicle": "^6.0.1"
   }
 }
