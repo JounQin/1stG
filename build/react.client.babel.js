@@ -1,10 +1,10 @@
-import webpack from 'webpack'
-import merge from 'webpack-merge'
 import { ReactSSRClientPlugin } from 'react-server-renderer/client-plugin'
 import SWPrecacheWebpackPlugin from 'sw-precache-webpack-plugin'
+import webpack from 'webpack'
+import merge from 'webpack-merge'
 
-import { __DEV__, hashType, publicPath, resolve } from './config'
 import base, { babelLoader } from './base'
+import { __DEV__, hashType, publicPath, resolve } from './config'
 
 const clientConfig = merge.smart(base, {
   entry: {

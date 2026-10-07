@@ -1,11 +1,11 @@
-import React from 'react'
 import PropTypes from 'prop-types'
+import React from 'react'
 
 import styles from './grid.scss'
 
-import { ExternalLink } from 'components/ExternalLink'
-import github from 'assets/github.webp'
 import githubFallback from 'assets/github.png'
+import github from 'assets/github.webp'
+import { ExternalLink } from 'components/ExternalLink'
 
 const classNames = classes => classes.join(' ')
 
@@ -22,9 +22,18 @@ export const Grid = ({ title, text, link, className }) => (
       <div className={styles.wrapper}>
         {text ? null : (
           <picture>
-            <source srcSet={github} type="image/webp" />
-            <source srcSet={githubFallback} type="image/jpeg" />
-            <img src={githubFallback} alt="GitHub" />
+            <source
+              srcSet={github}
+              type="image/webp"
+            />
+            <source
+              srcSet={githubFallback}
+              type="image/jpeg"
+            />
+            <img
+              src={githubFallback}
+              alt="GitHub"
+            />
           </picture>
         )}
         <h2>{title}</h2>
