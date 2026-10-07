@@ -9,10 +9,10 @@
   "private": true,
   "packageManager": "yarn@4.9.1",
   "engines": {
-    "node": "26.x"
+    "node": ">=24"
   },
   "scripts": {
-    "build": "rimraf dist && vite build && vite build --ssr src/entry-server.tsx",
+    "build": "rimraf dist && vite build --ssr src/entry-server.tsx && vite build",
     "build-static": "sh build/static.sh",
     "dev": "vite",
     "lint": "run-p \"lint:*\"",
