@@ -19,7 +19,7 @@
     "build:template": "node build/template.js",
     "dev": "cross-env \"DEBUG=1stg:*\" babel-node server",
     "lint": "run-p \"lint:*\"",
-    "lint:es": "cross-env EFF_NO_LINK_RULES=true eslint . --cache --max-warnings=10 -f friendly",
+    "lint:es": "eslint . --cache",
     "lint:style": "stylelint 'src/**/*.scss' --cache",
     "prepare": "simple-git-hooks",
     "start": "cross-env \"DEBUG=1stg:*\" node dist/server"
@@ -40,19 +40,23 @@
     "react-server-renderer": "^1.2.0"
   },
   "devDependencies": {
-    "@1stg/app-config": "^0.4.3",
+    "@1stg/app-config": "^15.0.0",
     "@1stg/nano-staged": "^0.3.1",
     "@1stg/simple-git-hooks": "^2.1.0",
+    "@babel/core": "^7.29.7",
+    "@babel/eslint-parser": "^7.29.9",
+    "@babel/eslint-plugin": "^7.29.7",
     "@babel/node": "^7.8.4",
     "@babel/register": "^7.8.3",
-    "@commitlint/cli": "^19.0.0",
+    "@commitlint/cli": "^21.0.0",
     "@hot-loader/react-dom": "^16.14.0",
     "babel-loader": "^8.3.0",
     "css-loader": "^3.6.0",
-    "eslint": "^6.8.0",
-    "eslint-import-resolver-webpack": "^0.13.8",
+    "eslint": "^9.0.0",
+    "eslint-plugin-react": "^7.37.5",
     "file-loader": "^6.2.0",
     "friendly-errors-webpack-plugin": "^1.7.0",
+    "globals": "^17.13.0",
     "html-minifier": "^4.0.0",
     "img-loader": "^3.0.1",
     "koa-webpack": "^5.3.0",
@@ -60,8 +64,9 @@
     "nano-staged": "^0.8.0",
     "normalize.css": "^8.0.1",
     "npm-run-all": "^4.1.5",
-    "postcss-loader": "^3.0.0",
+    "postcss-loader": "^4.3.0",
     "postcss-plugin-px2rem": "^0.8.1",
+    "prettier": "^3.0.0",
     "prop-types": "^15.7.2",
     "pug": "^3.0.0",
     "pug-plain-loader": "^1.0.0",
@@ -71,7 +76,7 @@
     "sass": "^1.69.5",
     "sass-loader": "^8.0.2",
     "simple-git-hooks": "^2.14.0",
-    "stylelint": "^13.2.0",
+    "stylelint": "^17.16.0",
     "sw-precache-webpack-plugin": "^1.0.0",
     "url-loader": "^4.1.1",
     "webpack": "^4.47.0",
@@ -80,7 +85,8 @@
     "webpack-node-externals": "^1.7.2"
   },
   "resolutions": {
-    "@babel/core": "^7.8.4",
+    "@babel/core": "^7.29.7",
+    "@eslint/js": "^9.39.4",
     "imagemin-gifsicle": "^6.0.1"
   }
 }
