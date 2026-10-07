@@ -26,6 +26,7 @@ __metadata:
     css-loader: "npm:^3.6.0"
     debug: "npm:^4.3.4"
     eslint: "npm:^9.0.0"
+    eslint-plugin-import-x: "npm:^4.16.2"
     eslint-plugin-react: "npm:^7.37.5"
     file-loader: "npm:^6.2.0"
     friendly-errors-webpack-plugin: "npm:^1.7.0"
