@@ -10,3 +10,6 @@ node_modules
 !.yarn/releases
 !.yarn/sdks
 !.yarn/versions
+
+# TypeScript incremental build state — nothing here belongs in the repository.
+*.tsbuildinfo

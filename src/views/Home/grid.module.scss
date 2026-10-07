@@ -1,3 +1,5 @@
+@use 'sass:math';
+
 @function abs($number) {
   @if $number >= 0 {
     @return $number;
@@ -6,16 +8,16 @@
   @return -1 * $number;
 }
 
-@function sqrt($square, $tolerance: 0.001, $estimate: $square / 2) {
+@function sqrt($square, $tolerance: 0.001, $estimate: math.div($square, 2)) {
   @if abs($square - $estimate * $estimate) < $tolerance {
     @return $estimate;
   }
 
-  @return sqrt($square, $tolerance, ($estimate + $square / $estimate) / 2);
+  @return sqrt($square, $tolerance, math.div($estimate + math.div($square, $estimate), 2));
 }
 
 $grid-size: 320px;
-$content-size: round($grid-size / sqrt(2));
+$content-size: math.round(math.div($grid-size, sqrt(2)));
 $bg-size: $content-size * 2;
 
 .wrapper {
@@ -144,10 +146,10 @@ $bg-size: $content-size * 2;
 }
 
 .github {
-  width: ($grid-size / 2);
-  height: ($grid-size / 2);
+  width: math.div($grid-size, 2);
+  height: math.div($grid-size, 2);
   margin-left: 0 - $content-size;
-  margin-top: 0 - ($content-size / 2);
+  margin-top: 0 - math.div($content-size, 2);
   background-color: #fad957;
 
   &:after {
@@ -173,7 +175,7 @@ $bg-size: $content-size * 2;
   }
 
   &:after {
-    background-image: url('~assets/site1.png');
+    background-image: url('assets/site1.png');
   }
 }
 
@@ -187,7 +189,7 @@ $bg-size: $content-size * 2;
   }
 
   &:after {
-    background-image: url('~assets/site2.png');
+    background-image: url('assets/site2.png');
   }
 }
 
@@ -201,21 +203,21 @@ $bg-size: $content-size * 2;
   }
 
   &:after {
-    background-image: url('~assets/site3.png');
+    background-image: url('assets/site3.png');
   }
 }
 
 :global(.webp) {
   .rubick:after {
-    background-image: url('~assets/site1.webp');
+    background-image: url('assets/site1.webp');
   }
 
   .react-hn:after {
-    background-image: url('~assets/site2.webp');
+    background-image: url('assets/site2.webp');
   }
 
   .blog:after {
-    background-image: url('~assets/site3.webp');
+    background-image: url('assets/site3.webp');
   }
 }
 
