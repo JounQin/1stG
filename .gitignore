@@ -2,3 +2,11 @@
 .*cache
 dist
 node_modules
+
+# Yarn 4 state — nothing here belongs in the repository.
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
