@@ -15,11 +15,16 @@
 Static hosting on Cloudflare Pages. There is no CI workflow and no runtime server: the build
 prerenders the site's single page into `dist/static`, and Pages serves that directory as-is.
 
-| Pages setting          | Value               |
-| ---------------------- | ------------------- |
-| Build command          | `yarn build-static` |
-| Build output directory | `dist/static`       |
-| Node version           | 18 (see `.nvmrc`)   |
+| Pages setting          | Value                                       |
+| ---------------------- | ------------------------------------------- |
+| Build command          | `yarn build-static`                         |
+| Build output directory | `dist/static`                               |
+| Node version           | 18 (see `.nvmrc`)                           |
+| Package manager        | Yarn 1 (`packageManager` in `package.json`) |
+
+`packageManager` is load-bearing: `yarn.lock` is a Yarn 1 lockfile, and without the field Corepack
+activates the newest Yarn, which rewrites the lockfile and then fails in CI mode with
+`YN0028: The lockfile would have been modified by this install, which is explicitly forbidden.`
 
 `yarn build-static` runs `build/static.sh`. `yarn build` produces the client assets in
 `dist/static`, the SSR server in `dist/server` and the HTML template in `dist/template.html`; the
