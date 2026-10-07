@@ -9,3 +9,20 @@
 [![codechecks.io](https://raw.githubusercontent.com/codechecks/docs/master/images/badges/badge-default.svg?sanitize=true)](https://codechecks.io)
 
 > Server Rendered Static Homepage Website powered by Technology Stack Of React
+
+## Deploy
+
+Static hosting on Cloudflare Pages. There is no CI workflow and no runtime server: the build
+prerenders the site's single page into `dist/static`, and Pages serves that directory as-is.
+
+| Pages setting          | Value               |
+| ---------------------- | ------------------- |
+| Build command          | `yarn build:static` |
+| Build output directory | `dist/static`       |
+| Node version           | 18 (see `.nvmrc`)   |
+
+`yarn build:static` runs `build/static.sh`. `yarn build` produces the client assets in
+`dist/static`, the SSR server in `dist/server` and the HTML template in `dist/template.html`; the
+script then starts that server on `:4000` just long enough to capture `/` as `index.html` and stops
+it again. Every path outside `/` is redirected to `/` by `server/index.js`, so one captured response
+is the whole site. The custom domain (`www.1stG.me`) is configured in the Pages project.
