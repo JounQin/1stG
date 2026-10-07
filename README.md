@@ -19,7 +19,7 @@ prerenders the site's single page into `dist/static`, and Pages serves that dire
 | ---------------------- | ------------------------------------------- |
 | Build command          | `yarn build-static`                         |
 | Build output directory | `dist/static`                               |
-| Node version           | 18 (see `.nvmrc`)                           |
+| Node version           | 24 (see `.nvmrc`)                           |
 | Package manager        | Yarn 4 (`packageManager` in `package.json`) |
 
 `packageManager` pins the Yarn major, and `.yarnrc.yml` sets `nodeLinker: node-modules` because
