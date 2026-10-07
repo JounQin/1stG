@@ -1,5 +1,5 @@
-import React from 'react'
 import PropTypes from 'prop-types'
+import React from 'react'
 
 import { Grid } from './Grid'
 import styles from './index.scss'
@@ -35,7 +35,10 @@ const GRIDS = [
 export const Home = () => (
   <main className={styles.main}>
     {GRIDS.map((info, index) => (
-      <Grid key={index} {...info} />
+      <Grid
+        key={index}
+        {...info}
+      />
     ))}
     <div className={styles.record}>
       <ExternalLink href="https://beian.miit.gov.cn">

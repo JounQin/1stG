@@ -9,7 +9,7 @@ jobs:
     strategy:
       matrix:
         node:
-          - 18
+          - 24
         os:
           - macOS-latest
           - ubuntu-latest
@@ -21,13 +21,15 @@ jobs:
         with:
           node-version: ${{ matrix.node }}
 
+      # packageManager pins Yarn 4, and the Yarn bundled with setup-node is 1.x, which refuses to run
+      # once that field names a different major. Corepack's shims make a plain `yarn` resolve to the
+      # pinned version, so the commands below need no prefix.
+      - run: corepack enable
+
       - name: Install Dependencies
-        run: yarn --frozen-lockfile
+        run: yarn install --immutable
 
       - name: Build, Lint
         run: |
           yarn lint
           yarn build
-        env:
-          EFF_NO_LINK_RULES: 'true'
-          PARSER_NO_WATCH: 'true'

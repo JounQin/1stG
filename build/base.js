@@ -1,6 +1,6 @@
-import webpack from 'webpack'
 import FriendlyErrorsWebpackPlugin from 'friendly-errors-webpack-plugin'
 import MiniCssExtractPlugin from 'mini-css-extract-plugin'
+import webpack from 'webpack'
 
 import { NODE_ENV, __DEV__, hashType, resolve } from './config'
 
@@ -47,7 +47,9 @@ export const babelLoader = isServer => ({
           '@1stg',
           {
             modules: false,
-            react: true,
+            react: {
+              jsxRuntime: 'classic',
+            },
             isTSX: true,
           },
         ],

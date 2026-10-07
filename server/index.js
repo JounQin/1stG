@@ -1,13 +1,14 @@
+// webpack 4 cannot resolve the node: protocol, and this module is bundled into dist/server.js.
 import fs from 'fs'
 
 import _debug from 'debug'
 import Koa from 'koa'
+import { version as koaVersion } from 'koa/package.json'
 import compose from 'koa-compose'
 import compress from 'koa-compress'
 import logger from 'koa-logger'
 import serve from 'koa-static-cache'
 import { createBundleRenderer } from 'react-server-renderer'
-import { version as koaVersion } from 'koa/package.json'
 import { version as reactSsrVersion } from 'react-server-renderer/package.json'
 
 import {
@@ -24,7 +25,7 @@ const template = __DEV__
   ? require('pug').renderFile(resolve('server/template.pug'), {
       pretty: true,
     })
-  : fs.readFileSync(resolve('dist/template.html'), 'utf-8')
+  : fs.readFileSync(resolve('dist/template.html'), 'utf8')
 
 const app = new Koa()
 
@@ -48,7 +49,7 @@ const middlewares = [
     if (
       ctx.method !== 'GET' ||
       ctx.url.lastIndexOf('.') > ctx.url.lastIndexOf('/') ||
-      !['*/*', 'text/html'].find(mimeType =>
+      !['*/*', 'text/html'].some(mimeType =>
         ctx.get('Accept').includes(mimeType),
       )
     ) {
@@ -85,7 +86,7 @@ if (__DEV__) {
     },
   )
   ready = readyPromise
-  // eslint-disable-next-line promise/catch-or-return
+  // eslint-disable-next-line promise/catch-or-return, unicorn-x/prefer-top-level-await
   webpackMiddlewarePromise.then(webpackMiddleware => app.use(webpackMiddleware))
 } else {
   renderer = createRenderer(

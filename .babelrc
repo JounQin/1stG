@@ -4,7 +4,9 @@
       "@1stg",
       {
         "modules": "commonjs",
-        "react": true,
+        "react": {
+          "jsxRuntime": "classic"
+        },
         "isTSX": true
       }
     ]
