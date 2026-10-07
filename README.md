@@ -17,22 +17,24 @@ prerenders the site's single page into `dist/static`, and Pages serves that dire
 
 | Pages setting          | Value                                       |
 | ---------------------- | ------------------------------------------- |
-| Build command          | `yarn build-static`                         |
+| Build command          | `yarn build`                                |
 | Build output directory | `dist/static`                               |
-| Node version           | 26 (see `.node-version`)                    |
+| Node version           | `lts/*` (see `.node-version`)               |
 | Package manager        | Yarn 4 (`packageManager` in `package.json`) |
 
 `packageManager` pins the Yarn major, and `.yarnrc.yml` sets `nodeLinker: node-modules` because the
 tooling assumes a real `node_modules` tree.
 
-Two `typescript` packages are installed under one name and one alias: `typescript` resolves to
-`@typescript/typescript6`, the TS 6 API that Yarn's builtin patch and typescript-eslint load by that
-name, while `@typescript/native` resolves to the TS 7 native CLI. Only the TS 6 package ships a
-`tsc` binary that Yarn hoists, so `lint:ts` invokes the native CLI by path.
+Two `typescript` packages are installed under one name and one alias: `typescript` resolves to the
+TS 6 build, the API that Yarn's builtin patch and typescript-eslint load by that name, while
+`@typescript/native` resolves to the TS 7 native CLI. Only the TS 6 package ships a `tsc` binary
+that Yarn hoists, so `lint:ts` invokes the native CLI by path.
 
-`yarn build-static` runs `build/static.sh`. `yarn build` builds the client into `dist/static` with
-Vite and the SSR entry into `dist/server`; `build/prerender.mts` then renders the single page to a
-string and writes it into the built `index.html`, which is the whole site. There is no server: the
-sources used to redirect every other path to `/` while a Koa process served the prerender, and that
-redirect is gone with it. Pages answers unmatched paths with `index.html` rather than redirecting
-the browser to `/`. The custom domain (`www.1stG.me`) is configured in the Pages project.
+`yarn build` builds the SSR entry into `dist/server` and the client into `dist/static`. The
+prerender is a plugin in `vite.config.ts`, listed before the PWA plugin: it renders the page to a
+string and writes it into the built `index.html`, and running before the service worker generation
+is what keeps the precached HTML the rendered page rather than the placeholder shell. There is no
+server: the sources used to redirect every other path to `/` while a Koa process served the
+prerender, and that redirect is gone with it. Pages answers unmatched paths with `index.html` rather
+than redirecting the browser to `/`. The custom domain (`www.1stG.me`) is configured in the Pages
+project.

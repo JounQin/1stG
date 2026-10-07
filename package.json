@@ -13,7 +13,6 @@
   },
   "scripts": {
     "build": "rimraf dist && vite build --ssr src/entry-server.tsx && vite build",
-    "build-static": "sh build/static.sh",
     "dev": "vite",
     "lint": "run-p \"lint:*\"",
     "lint:es": "eslint . --cache",
