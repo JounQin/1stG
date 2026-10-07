@@ -9,7 +9,7 @@ import serverConfig from '../build/react.server.babel'
 
 const debug = _debug('1stg:server:dev')
 
-export default done => {
+export default function dev(done) {
   let _resolve, clientManifest, bundle, fs
 
   const readyPromise = new Promise(resolve => {
@@ -34,8 +34,12 @@ export default done => {
 
   clientCompiler.plugin('done', stats => {
     stats = stats.toJson()
-    stats.errors.forEach(debug)
-    stats.warnings.forEach(debug)
+    for (const error of stats.errors) {
+      debug(error)
+    }
+    for (const warning of stats.warnings) {
+      debug(warning)
+    }
 
     if (stats.errors.length > 0) {
       return
@@ -60,7 +64,9 @@ export default done => {
   serverCompiler.outputFileSystem = mfs
 
   serverCompiler.watch({}, (err, stats) => {
-    if (err) throw err
+    if (err) {
+      throw err
+    }
     stats = stats.toJson()
     if (stats.errors.length > 0) {
       return
