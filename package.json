@@ -9,7 +9,7 @@
   "private": true,
   "packageManager": "yarn@4.9.1",
   "engines": {
-    "node": "24.x"
+    "node": "26.x"
   },
   "scripts": {
     "build": "rimraf dist && vite build && vite build --ssr src/entry-server.tsx",
@@ -18,7 +18,7 @@
     "lint": "run-p \"lint:*\"",
     "lint:es": "eslint . --cache",
     "lint:style": "stylelint 'src/**/*.scss' --cache",
-    "lint:ts": "tsc --noEmit",
+    "lint:ts": "node ./node_modules/@typescript/native/bin/tsc --noEmit",
     "prepare": "simple-git-hooks",
     "preview": "vite preview"
   },
@@ -33,9 +33,10 @@
     "@1stg/tsconfig": "^4.0.0",
     "@commitlint/cli": "^21.0.0",
     "@eslint-react/eslint-plugin": "^5.0.0",
-    "@types/node": "^24.7.0",
+    "@types/node": "^26.6.4",
     "@types/react": "^19.2.0",
     "@types/react-dom": "^19.2.0",
+    "@typescript/native": "npm:typescript@^7.0.2",
     "@vitejs/plugin-react-swc": "^4.2.0",
     "autoprefixer": "^10.4.21",
     "cssnano": "^9.3.2",
@@ -51,7 +52,7 @@
     "sass": "^1.105.1",
     "simple-git-hooks": "^2.14.0",
     "stylelint": "^17.16.0",
-    "typescript": "^6.0.0",
+    "typescript": "npm:@typescript/typescript6@^6.0.2",
     "vite": "^8.3.3",
     "vite-plugin-pwa": "^2.0.0"
   }
