@@ -57,10 +57,12 @@ export default defineConfig(({ isSsrBuild }) => ({
         entryFileNames: isSsrBuild
           ? 'entry-server.mjs'
           : 'assets/[name].[hash].js',
-        // One vendor chunk and one app chunk, as the webpack build produced.
+        // One vendor chunk and one app chunk, as the webpack build produced. Vite 8 bundles with
+        // Rolldown, which only accepts the function form of manualChunks.
         manualChunks: isSsrBuild
           ? undefined
-          : { vendors: ['react', 'react-dom'] },
+          : (id: string) =>
+              id.includes('node_modules') ? 'vendors' : undefined,
       },
     },
   },

@@ -17,7 +17,7 @@
 }
 
 $grid-size: 320px;
-$content-size: round(math.div($grid-size, sqrt(2)));
+$content-size: math.round(math.div($grid-size, sqrt(2)));
 $bg-size: $content-size * 2;
 
 .wrapper {
