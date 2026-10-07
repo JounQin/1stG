@@ -51,7 +51,7 @@
     "sass": "^1.105.1",
     "simple-git-hooks": "^2.14.0",
     "stylelint": "^17.16.0",
-    "typescript": "npm:typescript@^7.0.0",
+    "typescript": "npm:@typescript/typescript6@^6.0.2",
     "vite": "^8.3.3",
     "vite-plugin-pwa": "^2.0.0"
   }
