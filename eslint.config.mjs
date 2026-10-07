@@ -3,7 +3,6 @@ import path from 'node:path'
 
 import recommended from '@1stg/eslint-config'
 import { createNodeResolver } from 'eslint-plugin-import-x'
-import react from 'eslint-plugin-react'
 import globals from 'globals'
 
 // Vite resolves bare specifiers from src/ (see the alias table in vite.config.ts). The resolver's
@@ -30,17 +29,6 @@ export default [
           modules: MODULE_DIRECTORIES,
         }),
       ],
-    },
-    plugins: {
-      react,
-    },
-    rules: {
-      // Core no-unused-vars does not count an identifier that only appears in JSX. @1stg/eslint-config
-      // leaves that to a React plugin, and the one it gates on ships no equivalent, so both rules
-      // come from eslint-plugin-react: jsx-uses-vars for <Component />, and jsx-uses-react for the
-      // React import the classic JSX runtime needs.
-      'react/jsx-uses-react': 'error',
-      'react/jsx-uses-vars': 'error',
     },
   },
   {
