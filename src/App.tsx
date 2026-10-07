@@ -1,7 +1,6 @@
-import React, { useEffect } from 'react'
-import { hot } from 'react-hot-loader/root'
+import { useEffect } from 'react'
 
-import 'styles/app'
+import './styles/app.scss'
 
 import { Home } from 'views/Home'
 
@@ -18,7 +17,7 @@ const resize = () => {
         ) *
           100 +
         'px'
-      : null
+      : ''
 }
 
 const useResize = () =>
@@ -33,4 +32,4 @@ const App = () => {
   return <Home />
 }
 
-export default __DEV__ ? hot(App) : App
+export default App

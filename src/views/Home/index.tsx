@@ -1,8 +1,7 @@
-import PropTypes from 'prop-types'
 import React from 'react'
 
 import { Grid } from './Grid'
-import styles from './index.scss'
+import styles from './index.module.scss'
 
 import { ExternalLink } from 'components/ExternalLink'
 
@@ -48,7 +47,3 @@ export const Home = () => (
     </div>
   </main>
 )
-
-Home.propTypes = {
-  style: PropTypes.object,
-}

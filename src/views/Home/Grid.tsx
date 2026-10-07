@@ -1,15 +1,21 @@
-import PropTypes from 'prop-types'
 import React from 'react'
 
-import styles from './grid.scss'
+import styles from './grid.module.scss'
 
 import githubFallback from 'assets/github.png'
 import github from 'assets/github.webp'
 import { ExternalLink } from 'components/ExternalLink'
 
-const classNames = classes => classes.join(' ')
+const classNames = (classes: string[]) => classes.join(' ')
 
-export const Grid = ({ title, text, link, className }) => (
+export interface GridProps {
+  className: string
+  link: string
+  text?: string
+  title: string
+}
+
+export const Grid = ({ title, text, link, className }: GridProps) => (
   <ExternalLink
     href={link}
     className={classNames([styles.grid, styles[className]])}
@@ -42,10 +48,3 @@ export const Grid = ({ title, text, link, className }) => (
     </div>
   </ExternalLink>
 )
-
-Grid.propTypes = {
-  title: PropTypes.string,
-  text: PropTypes.string,
-  link: PropTypes.string,
-  className: PropTypes.string,
-}

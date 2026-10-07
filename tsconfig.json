@@ -1,0 +1,15 @@
+{
+  "extends": "@1stg/tsconfig",
+  "compilerOptions": {
+    "lib": ["ESNext", "DOM", "DOM.Iterable"],
+    "paths": {
+      "App": ["./src/App.tsx"],
+      "assets/*": ["./src/assets/*"],
+      "components/*": ["./src/components/*"],
+      "views/*": ["./src/views/*"]
+    },
+    "types": ["vite/client", "vite-plugin-pwa/client"]
+  },
+  "include": ["src", "vite.config.ts", "eslint.config.mjs"],
+  "exclude": ["build"]
+}
