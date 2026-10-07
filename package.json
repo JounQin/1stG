@@ -6,8 +6,9 @@
   "author": "JounQin <admin@1stg.me>",
   "license": "MIT",
   "private": true,
+  "packageManager": "yarn@4.9.1",
   "engines": {
-    "node": "18.x"
+    "node": "24.x"
   },
   "scripts": {
     "build": "rimraf dist && cross-env \"DEBUG=1stg:*\" NODE_ENV=production NODE_OPTIONS=--openssl-legacy-provider run-p \"build:**\"",
@@ -81,6 +82,5 @@
   "resolutions": {
     "@babel/core": "^7.8.4",
     "imagemin-gifsicle": "^6.0.1"
-  },
-  "packageManager": "yarn@4.9.1"
+  }
 }
