@@ -20,6 +20,7 @@
     "lint": "run-p \"lint:*\"",
     "lint:es": "cross-env EFF_NO_LINK_RULES=true eslint . --cache --max-warnings=10 -f friendly",
     "lint:style": "stylelint 'src/**/*.scss' --cache",
+    "prepare": "simple-git-hooks",
     "start": "cross-env \"DEBUG=1stg:*\" node dist/server"
   },
   "dependencies": {
@@ -39,8 +40,11 @@
   },
   "devDependencies": {
     "@1stg/app-config": "^0.4.3",
+    "@1stg/nano-staged": "^0.3.1",
+    "@1stg/simple-git-hooks": "^2.1.0",
     "@babel/node": "^7.8.4",
     "@babel/register": "^7.8.3",
+    "@commitlint/cli": "^19.0.0",
     "@hot-loader/react-dom": "^16.14.0",
     "babel-loader": "^8.3.0",
     "css-loader": "^3.6.0",
@@ -52,6 +56,7 @@
     "img-loader": "^3.0.1",
     "koa-webpack": "^5.3.0",
     "mini-css-extract-plugin": "^0.9.0",
+    "nano-staged": "^0.8.0",
     "normalize.css": "^8.0.1",
     "npm-run-all": "^4.1.5",
     "postcss-loader": "^3.0.0",
@@ -64,14 +69,14 @@
     "rimraf": "^3.0.2",
     "sass": "^1.69.5",
     "sass-loader": "^8.0.2",
+    "simple-git-hooks": "^2.14.0",
     "stylelint": "^13.2.0",
     "sw-precache-webpack-plugin": "^1.0.0",
     "url-loader": "^4.1.1",
     "webpack": "^4.47.0",
     "webpack-cli": "^3.3.12",
     "webpack-merge": "^4.2.2",
-    "webpack-node-externals": "^1.7.2",
-    "yarn-deduplicate": "^1.1.1"
+    "webpack-node-externals": "^1.7.2"
   },
   "resolutions": {
     "@babel/core": "^7.8.4",
