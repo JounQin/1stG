@@ -11,10 +11,10 @@
   },
   "scripts": {
     "build": "rimraf dist && cross-env DEBUG=1stg:* NODE_ENV=production NODE_OPTIONS=--openssl-legacy-provider run-p build:**",
+    "build-static": "sh build/static.sh",
     "build:react:client": "webpack --config=build/react.client.babel.js --colors --progress",
     "build:react:server": "webpack --config=build/react.server.babel.js --colors --progress",
     "build:server": "webpack --config build/server.babel.js --colors --progress",
-    "build:static": "sh build/static.sh",
     "build:template": "node build/template.js",
     "dev": "cross-env DEBUG=1stg:* babel-node server",
     "lint": "run-p lint:*",

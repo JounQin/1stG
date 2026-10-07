@@ -17,11 +17,11 @@ prerenders the site's single page into `dist/static`, and Pages serves that dire
 
 | Pages setting          | Value               |
 | ---------------------- | ------------------- |
-| Build command          | `yarn build:static` |
+| Build command          | `yarn build-static` |
 | Build output directory | `dist/static`       |
 | Node version           | 18 (see `.nvmrc`)   |
 
-`yarn build:static` runs `build/static.sh`. `yarn build` produces the client assets in
+`yarn build-static` runs `build/static.sh`. `yarn build` produces the client assets in
 `dist/static`, the SSR server in `dist/server` and the HTML template in `dist/template.html`; the
 script then starts that server on `:4000` just long enough to capture `/` as `index.html` and stops
 it again. Every path outside `/` is redirected to `/` by `server/index.js`, so one captured response
