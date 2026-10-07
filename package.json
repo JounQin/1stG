@@ -20,7 +20,6 @@
     "lint": "run-p \"lint:*\"",
     "lint:es": "cross-env EFF_NO_LINK_RULES=true eslint . --cache --max-warnings=10 -f friendly",
     "lint:style": "stylelint 'src/**/*.scss' --cache",
-    "prepare": "yarn-deduplicate || exit 0",
     "start": "cross-env \"DEBUG=1stg:*\" node dist/server"
   },
   "dependencies": {

@@ -21,13 +21,16 @@ jobs:
         with:
           node-version: ${{ matrix.node }}
 
+      # packageManager pins Yarn 4, and the Yarn bundled with setup-node is 1.x, which refuses to run
+      # at all once that field names a different major. Going through Corepack needs no install step
+      # for Yarn itself and no write access to the Node directory, unlike `corepack enable`.
       - name: Install Dependencies
-        run: yarn --frozen-lockfile
+        run: corepack yarn install --immutable
 
       - name: Build, Lint
         run: |
-          yarn lint
-          yarn build
+          corepack yarn lint
+          corepack yarn build
         env:
           EFF_NO_LINK_RULES: 'true'
           PARSER_NO_WATCH: 'true'
