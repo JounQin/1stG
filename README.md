@@ -28,5 +28,7 @@ Yarn 4 defaults to Plug'n'Play, which this webpack 4 toolchain cannot use.
 `yarn build-static` runs `build/static.sh`. `yarn build` produces the client assets in
 `dist/static`, the SSR server in `dist/server` and the HTML template in `dist/template.html`; the
 script then starts that server on `:4000` just long enough to capture `/` as `index.html` and stops
-it again. Every path outside `/` is redirected to `/` by `server/index.js`, so one captured response
-is the whole site. The custom domain (`www.1stG.me`) is configured in the Pages project.
+it again. `server/index.js` redirects every other path to `/`, which is why one captured response is
+the whole site: that redirect belongs to the prerender, not to the deployment. Pages answers
+unmatched paths with `index.html` rather than redirecting the browser to `/`. The custom domain
+(`www.1stG.me`) is configured in the Pages project.
